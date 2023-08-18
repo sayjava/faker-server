@@ -1,8 +1,8 @@
 {
-    "shopify": {
-        "path": "/api/2023-07/graphql.json"
-    },
-    "github": {
-        "path": "/graphql"
-    }
+  "shopify": {
+    "path": "/api/2023-07/graphql.json"
+  },
+  "github": {
+    "path": "/graphql"
+  }
 }

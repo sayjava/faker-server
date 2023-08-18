@@ -1,8 +1,8 @@
-import { Handlebars } from '../../deps.ts'
+import { Handlebars, HelperOptions } from "../../deps.ts";
 
 Handlebars.registerHelper(
-  'var',
-  function (name: string, value: any, options: any) {
-    options.data.root[name] = value
-  }
-)
+  "var",
+  function (name: string, value: number | string, options: HelperOptions) {
+    options.data.root[name] = value;
+  },
+);

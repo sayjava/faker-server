@@ -1,8 +1,8 @@
 # Mock Shopify Guide
 
 `Mock Shopify` is a mock Shopify GraphQL API server for testing and development
-purposes. It uses the Shopify GraphQL Schema to provide a mock of the GraphQL API
-that can be used to rapidly prototype Shopify custom storefronts.
+purposes. It uses the Shopify GraphQL Schema to provide a mock of the GraphQL
+API that can be used to rapidly prototype Shopify custom storefronts.
 
 This guide will help you get started with `Mock Shopify`. `Mock Shopify` is a
 mock Shopify API that allows developers to build Shopify UI components without
@@ -14,37 +14,41 @@ mock Shopify API.
 > [!NOTE] Shopify GraphQL API Version 2023-07
 
 - [Mock Shopify Guide](#mock-shopify-guide)
-  * [Getting Started](#getting-started)
-    + [How It Works](#how-it-works)
-    + [Supported Operations](#supported-operations)
-    + [Simulating Alternative States](#simulating-alternative-states)
-  * [Internationalization](#internationalization)
-    + [Internationalization Control headers](#internationalization-control-headers)
-  * [Products](#products)
-    + [Product Control headers](#product-control-headers)
-    + [Product Recommendations](#product-recommendations)
-    + [Product Recommendation Control headers](#product-recommendation-control-headers)
-  * [Collection(s)](#collection-s-)
-    + [Collection Filters](#collection-filters)
-  * [Cart](#cart)
-    + [Cart Control headers](#cart-control-headers)
-  * [Search](#search)
-    + [Search Control headers](#search-control-headers)
-  * [Predictive Search](#predictive-search)
-    + [Predictive Search Control headers](#predictive-search-control-headers)
-  * [Checkout](#checkout)
+  - [Getting Started](#getting-started)
+    - [How It Works](#how-it-works)
+    - [Supported Operations](#supported-operations)
+    - [Simulating Alternative States](#simulating-alternative-states)
+  - [Internationalization](#internationalization)
+    - [Internationalization Control headers](#internationalization-control-headers)
+  - [Products](#products)
+    - [Product Control headers](#product-control-headers)
+    - [Product Recommendations](#product-recommendations)
+    - [Product Recommendation Control headers](#product-recommendation-control-headers)
+  - [Collection(s)](#collection-s-)
+    - [Collection Filters](#collection-filters)
+  - [Cart](#cart)
+    - [Cart Control headers](#cart-control-headers)
+  - [Search](#search)
+    - [Search Control headers](#search-control-headers)
+  - [Predictive Search](#predictive-search)
+    - [Predictive Search Control headers](#predictive-search-control-headers)
+  - [Checkout](#checkout)
 
 ## Getting Started
 
-Just point your application to the `Mock Shopify` GraphQL endpoint at `https://mock-shopify.run/api/2023-07/graphql.json` and you're good to go.
+Just point your application to the `Mock Shopify` GraphQL endpoint at
+`https://mock-shopify.run/api/2023-07/graphql.json` and you're good to go.
 
 ### How It Works
 
-It uses [fakerjs](https://fakerjs.dev/) to generate simulated data in the response and these responses are created using [handlebars](https://handlebarsjs.com/) templates in this repository.
+It uses [fakerjs](https://fakerjs.dev/) to generate simulated data in the
+response and these responses are created using
+[handlebars](https://handlebarsjs.com/) templates in this repository.
 
 ### Supported Operations
 
-These are the currently supported operations. Operations that are not supported returns an error.
+These are the currently supported operations. Operations that are not supported
+returns an error.
 
 - [x] Shop
 - [x] Product(s)
@@ -98,7 +102,8 @@ await fetch("https://Mock shopify.vercel.app/api/headers", {
 
 ### Mock Images
 
-`Mock Shopify` generates a data uri svg placeholder that can be used in place of a real images.
+`Mock Shopify` generates a data uri svg placeholder that can be used in place of
+a real images.
 
 ## Internationalization
 

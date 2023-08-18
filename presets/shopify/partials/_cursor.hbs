@@ -1,0 +1,6 @@
+{
+    "endCursor": "{{ faker "string.alphanumeric" 5 }}",
+    "startCursor": "{{ faker "string.alphanumeric" 5 }}",
+    "hasNextPage": {{#if noNextPage}}false{{else}}true{{/if}},
+    "hasPreviousPage": {{#if noPreviousPage}}false{{else}}true{{/if}}
+}

@@ -1,0 +1,7 @@
+{{#unless (get path="ms-cart-not-found" context=context.headers)}}
+    {{#if (get path="ms-cart-empty" context=context.headers)}}
+        {{> cart num_of_lines=0}}
+    {{else}}
+        {{> cart num_of_lines=(select context.tree.cart.lines.__args.first 10)}}
+    {{/if}}
+{{/unless}}

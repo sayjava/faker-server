@@ -1,0 +1,97 @@
+{{#*inline "lineItem"}}
+    {
+        "currentQuantity": {{faker "number.int" min=1 max=10}},
+        "customAttributes": [],
+        {{!-- TODO: create discounted allocations --}}
+        "discountAllocations": [],
+        "discountedTotalPrice": {{> money}},
+        "originalTotalPrice": {{> money}},
+        "quantity": {{faker "number.int" min=1 max=10}},
+        "title": "{{faker "commerce.productName"}}",
+        "variant": {{> product-variant}}
+    }
+{{/inline}}
+
+{
+    "__typename": "Order",
+    "id": "{{faker "string.uuid"}}",
+    "name": "{{faker "person.firstName"}} {{faker "person.lastName"}}",
+    "email": "{{faker "internet.email"}}",
+    "phone": "{{faker "phone.number"}}",
+    "processedAt": "{{faker "date.recent"}}",
+    "orderNumber": {{faker "number.int" min=100 max=999}},
+    "billingAddress": {{> address}},
+    {{!-- TODO: use real currency code --}}
+    "currencyCode": "USD",
+    "currentSubtotal": {{> money}},
+    "billingAddress": {{> address}},
+    "currentSubtotalPrice": {{> money}},
+    "subtotalPrice": {{> money}},
+    "currentTotalDuties": {{> money}},
+    "currentTotalPrice": {{> money}},
+    "currentTotalTax": {{> money}},
+    "totalPrice": {{> money}},
+    "totalRefunded": {{> money}},
+    "totalShippingPrice": {{> money}},
+    "originalTotalDuties": {{> money}},
+    "originalTotalPrice": {{> money}},
+    "totalPriceV2": {{> money}},
+    "subtotalPriceV2": {{> money}},
+    "totalTax": {{> money}},
+    "totalTaxV2": {{> money}},
+    "customerUrl": "{{faker "internet.url"}}",
+    "customAttributes": [],
+    {{!-- TODO: create other financial status --}}
+    "financialStatus": "PAID",
+    {{!-- TODO: custom locale --}}
+    "customerLocale": "en",
+    "statusUrl": "{{faker "internet.url"}}",
+    {{!-- TODO: create discounts --}}
+    "discountApplications": {
+        "edges": [],
+        "nodes": [],
+        "pageInfo": {
+            "hasNextPage": false,
+            "hasPreviousPage": false
+        }
+    },
+    "metafields": [],  
+    "edited": false,
+    {{!-- TODO: create alternative fulfillment status --}}
+    "fulfillmentStatus": "FULFILLED",
+     {{!-- TODO: create no fulfillments --}}
+    "successfulFulfillments": [
+        {{#repeat 3}}
+            {
+                "trackingCompany": "{{faker "company.name"}}",
+                "trackingInfo": [
+                    {{#repeat 2}}
+                        {
+                            "number": "{{faker "number.int"}}",
+                            "url": "{{faker "internet.url"}}"
+                        }
+                    {{/repeat}}
+                ]
+            }
+        {{/repeat}}
+    ],
+    "shippingAddress": {{> address}},
+    {{!-- TODO: create shipping discounts  --}}
+    "shippingDiscountAllocations": [],
+    "lineItems": {
+        "edges": [
+            {{#repeat 5}}
+                {{> lineItem}}
+            {{/repeat}}
+        ],
+        "nodes": [
+            {{#repeat 5}}
+                {{> lineItem}}
+            {{/repeat}}
+        ],
+        "pageInfo": {
+            "hasNextPage": false,
+            "hasPreviousPage": false
+        }
+    }
+}

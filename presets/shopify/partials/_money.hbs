@@ -1,0 +1,4 @@
+{
+    "amount": "{{faker "number.float" min=(select min 50) max=(select max 100) precision=0.01}}",
+    "currencyCode": "{{select (get path="ms-shop-currency" context=context.headers) "USD"}}"
+}

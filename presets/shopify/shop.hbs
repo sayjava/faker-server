@@ -1,0 +1,77 @@
+{
+    "id": "{{faker "number.int" min=100 max=10000}}",
+    "brand": {
+        "coverImage": {
+            "image": {{> image "quick"}},
+            "alt": "Brand Cover",
+            "previewImage": {{> image "quick shop"}},
+            "mediaContentType": "IMAGE"
+        }
+    },
+    "description": "Quick Shopify Shop",
+    "name": "Quick Shopify Shop Ltd",
+    "moneyFormat": "USD",
+    "paymentSettings": {
+        "acceptedCardBrands": [
+            "VISA",
+            "MASTERCARD",
+            "AMERICAN_EXPRESS",
+            "DISCOVER",
+            "JCB",
+            "DINERS_CLUB"
+        ],
+        "cardVaultUrl": "https://elb.deposit.shopifycs.com/sessions",
+        "countryCode": "US",
+        "currencyCode": "USD",
+        "shopifyPaymentsAccountId": "gid://shopify/ShopifyPaymentsAccount/{{faker "number.int" min=1 max=100}}",
+        "supportedDigitalWallets": [
+            "APPLE_PAY",
+            "GOOGLE_PAY"
+        ]
+    },
+    "primaryDomain": {
+        "host": "quick-shopify.myshopify.com",
+        "sslEnabled": true,
+        "url": "https://quick-shopify.myshopify.com"
+    },
+    "privacyPolicy": {
+        "body": {{{nlbr (faker 'lorem.lines' min=3 max=5)}}},
+        "id": "gid://shopify/ShopPolicy/{{faker "number.int" min=1 max=100}}",
+        "title": "Privacy Policy",
+        "handle": "privacy-policy",
+        "url": "https://quick-shopify.myshopify.com/policies/privacy-policy"
+    },
+    "refundPolicy": {
+        "body": {{{nlbr (faker 'lorem.lines' min=1 max=2)}}},
+        "id": "gid://shopify/ShopPolicy/{{faker "number.int" min=1 max=100}}",
+        "title": "Refund Policy",
+        "handle": "refund-policy",
+        "url": "https://quick-shopify.myshopify.com/policies/refund-policy"
+    },
+    "termsOfService": {
+        "body": {{{nlbr (faker 'lorem.lines' min=1 max=2)}}},
+        "id": "gid://shopify/ShopPolicy/{{faker "number.int" min=1 max=100}}",
+        "title": "Terms of Service",
+        "handle": "terms-of-service",
+        "url": "https://quick-shopify.myshopify.com/policies/terms-of-service"
+    },
+    "shippingPolicy": {
+        "body": {{{nlbr (faker 'lorem.lines' min=1 max=2)}}},
+        "id": "gid://shopify/ShopPolicy/{{faker "number.int" min=1 max=100}}",
+        "title": "Shipping Policy",
+        "handle": "shipping-policy",
+        "url": "https://quick-shopify.myshopify.com/policies/shipping-policy"
+    },
+    "shipsToCountries": [
+        "US",
+        "CA",
+        "GB",
+        "AU",
+        "DE",
+        "JP",
+        "FR",
+        "IT",
+        "ES",
+        "NL"
+    ]
+}

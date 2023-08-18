@@ -1,0 +1,76 @@
+{
+    "pageInfo": {{> cursor}},
+    "productFilters":[
+        {
+            "id": "filter.p.type",
+            "label": "Product Type",
+            "type": "LIST",
+            "values": [
+                {{#repeat 3}}
+                    {
+                        "id": "filter.p.type{{@index}}",
+                        "label": "{{faker 'lorem.word'}}",
+                        "count": {{faker 'number.int' min=1 max=10}},
+                        "input": "{\"productType\":\"{{faker 'lorem.words' max=1}}\"}"
+                    }
+                {{/repeat}}
+            ]
+        },
+        {
+            "id": "filter.p.vendor",
+            "label": "Vendor",
+            "type": "LIST",
+            "values": [
+                {{#repeat 3}}
+                    {
+                        "id": "filter.p.vendor{{@index}}",
+                        "label": "{{faker 'company.name'}}",
+                        "count": {{faker 'number.int' min=1 max=10}},
+                        "input": "{\"productVendor\":\"{{faker 'company.name'}}\"}"
+                    }
+                {{/repeat}}
+            ]
+        },
+        {
+            "id": "filter.p.available",
+            "label": "Availability",
+            "type": "LIST",
+            "values": [
+                {
+                    "id": "filter.p.available1",
+                    "label": "Online Only",
+                    "count": {{faker 'number.int' min=1 max=10}},
+                    "input": "{\"availableForSale\":true}"
+                },
+                {
+                    "id": "filter.p.available2",
+                    "label": "In Store Only",
+                    "count": {{faker 'number.int' min=1 max=10}},
+                    "input": "{\"availableForSale\":false}"
+                }
+            ]
+        }
+    ],
+    "edges": [
+        {{#unless (get path="ms-search-no-results" context=context.headers)}}
+            {{#repeat (faker "number.int" min=10 max=20)}}
+                {
+                    "cursor": "next-cursor",
+                    "node": {{> product }}
+                }
+            {{/repeat}}
+        {{/unless}}
+    ],
+    "nodes": [
+        {{#unless (get path="ms-search-no-results" context=context.headers)}}
+            {{#repeat (faker "number.int" min=10 max=20)}} 
+                {{> product }}
+            {{/repeat}}
+        {{/unless}}
+    ],
+    {{#if (get path="ms-search-no-results" context=context.headers)}}
+        "totalCount": 0
+    {{else}}
+        "totalCount": {{select context.tree.search.__args.first 20}}
+    {{/if}}
+}

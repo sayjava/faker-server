@@ -1,0 +1,61 @@
+{
+   "__typename": "ProductVariant",
+   "id": "gid://shopify/ProductVariant/{{faker "string.uuid" }}",
+   "barcode": "{{faker "string.alphanumeric" 5}}",
+   "availableForSale": {{get path="ms-product-out-of-stock" context=context.headers default=true}},
+   "barcode": "{{faker "string.alphanumeric" 10}}",
+   "compareAtPrice": {{> money}},
+   "currentlyNotInStock": {{get path="ms-product-out-of-stock" context=context.headers default=true}},
+   "image": {{> image}},
+   "price": {{> money}},
+   "quantityAvailable": {{#if (get path="ms-product-out-of-stock" context=context.headers) }} 0 {{else}} 10 {{/if}},
+   "requiresShipping": true,
+   "sku": "{{faker "string.alphanumeric" 5}}",
+   "selectedOptions": [
+        {{#repeat 3}}
+            {
+                "name": "{{{faker "commerce.productMaterial"}}}",
+                "value": "{{{faker "commerce.productMaterial"}}}"
+            }
+        {{/repeat}}
+    ],
+   "title": "{{faker "commerce.productName" }}",
+   "image": {{> image}},
+   "unitPrice": {{> money}},
+   "priceV2": {{> money}},
+   "options": [{
+        "id": "{{faker "string.alphanumeric" 5}}",
+        "name": "{{{faker "commerce.productMaterial"}}}",
+        "values": [
+            {{#repeat 3}}
+                "{{{faker "commerce.productMaterial"}}}"
+            {{/repeat}}
+        ]
+    }],
+    "unitPriceMeasurement": {
+        "measuredType": "VOLUME",
+        "quantityUnit": "ML",
+        "quantityValue": {{faker "number.int" min=10 max=1000}},
+        "referenceUnit": "ML",
+        "referenceValue": {{faker "number.int" min=10 max=1000}}
+    },
+    "product": {
+        "__typename": "Product",
+        "id": "gid://shopify/Product/{{faker 'number.int' min=1000000000 max=9999999999}}",
+        "availableForSale": {{#if (get path="ms-product-out-of-stock" context=context.headers) }} false {{else}} true {{/if}},
+        "title": "{{faker 'commerce.productName' }}",
+        "productType": "{{faker 'commerce.productAdjective' }}",
+        "createdAt": "{{faker 'date.recent' }}",
+        "handle": "{{faker 'lorem.slug' 5}}",
+        "vendor": "{{faker 'company.name' }}",
+        "description": {{{nlbr (faker 'commerce.productDescription')}}},
+        "descriptionHtml": {{{nlbr (faker 'lorem.lines' min=5 max=10)}}},
+        "isGiftCard": {{#if (get path="ms-product-giftcard" context=context.headers) }} false {{else}} true {{/if}},
+        "totalInventory": {{#if (get path="ms-product-out-of-stock" context=context.headers)}}0{{else}}{{faker 'number.int' min=10 max=10000}}{{/if}},
+        "priceRange": {
+            "maxVariantPrice": {{> money}},
+            "minVariantPrice": {{> money}}
+        },
+        "featuredImage": {{> image}}
+    }
+}

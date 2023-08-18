@@ -1,0 +1,23 @@
+{
+    "id": "{{faker "string.uuid" }}",
+    "address1": "{{faker "location.streetAddress" }}",
+    "address2": "{{faker "location.streetAddress" }}",
+    "city": "{{faker "location.city" }}",
+    "state": "{{faker "location.state" }}",
+    "zip": "{{faker "location.zipCode" }}",
+    "country": "{{faker "location.country" }}",
+    "company": "{{faker "company.name" }}",
+    "phone": "{{faker "phone.number" "+4891#######" }}",
+    "firstName": "{{faker "person.firstName" }}",
+    "lastName": "{{faker "person.lastName" }}",
+    "name": "{{faker "person.firstName" }} {{faker "person.lastName" }}",
+    "province": "{{faker "location.state" }}",
+    "provinceCode": "{{faker "location.state" abbreviated=true }}",
+    "countryCodeV2:": "{{faker "location.countryCode" variant="alpha-2" }}",
+    "formatted": [
+        "{{faker "person.firstName" }} {{faker "person.lastName" }}",
+        "{{faker "location.streetAddress" }}",
+        "{{faker "location.city" }} {{faker "location.state" }} {{faker "location.zipCode" }}",
+        "{{faker "location.country" }}"
+    ]
+}

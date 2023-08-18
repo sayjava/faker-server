@@ -1,0 +1,40 @@
+{
+    "queries": [
+        {
+             "styledText": "{{faker "lorem.word"}} {{context.tree.predictiveSearch.__args.query}}",
+            "text": "{{context.tree.predictiveSearch.__args.query}} {{faker 'lorem.word'}}"
+        },
+        {
+            "styledText": "{{faker "lorem.word"}} {{context.tree.predictiveSearch.__args.query}}",
+            "text": "{{faker 'lorem.word'}} {{context.tree.predictiveSearch.__args.query}}"
+        }
+    ],
+    "products": [
+        {{#unless (get path="ms-predictive-search-no-results" context=context.headers)}}
+            {{#repeat 10}}
+                {{> product}}
+            {{/repeat}}
+        {{/unless}}
+    ],
+    "collections": [
+        {{#unless (get path="ms-predictive-search-no-results" context=context.headers)}}
+            {{#repeat 10}}
+                {{> collection}}
+            {{/repeat}}
+        {{/unless}}
+    ],
+    "articles": [
+        {{#unless (get path="ms-predictive-search-no-results" context=context.headers)}}
+            {{#repeat 10}}
+                {{> article}}
+            {{/repeat}}
+        {{/unless}}
+    ],
+    "pages": [
+        {{#unless (get path="ms-predictive-search-no-results" context=context.headers)}}
+            {{#repeat 10}}
+                {{> page}}
+            {{/repeat}}
+        {{/unless}}
+    ]
+}

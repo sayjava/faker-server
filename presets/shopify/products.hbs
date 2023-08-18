@@ -1,0 +1,16 @@
+{
+    "pageInfo": {{> cursor noPreviousPage=true}},
+    "edges": [
+        {{#repeat (select num_of_products context.tree.products.__args.first 10)}}
+            {
+                "cursor": "{{faker "string.alphanumeric" 5}}",
+                "node": {{> product }}
+            }
+        {{/repeat}}
+    ],
+    "nodes": [
+        {{#repeat (select context.tree.products.__args.first num_of_products 10)}}
+             {{> product }}
+        {{/repeat}}
+    ]
+}

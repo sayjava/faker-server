@@ -1,0 +1,13 @@
+{{!-- 
+    Support for Shopify collections
+    https://shopify.dev/docs/storefront-api/reference/object/collection
+    - No collection found
+    - No products in collection
+ --}}
+{{#unless (get path="ms-collection-not-found" context=context.headers)}}
+   {{#if (get path="ms-collection-no-products" context=context.headers)}}
+        {{> collection products_total=0}}
+    {{else}}
+        {{> collection products_total=(select context.tree.collection.products.__args.first 10) }}
+    {{/if}}
+{{/unless}}

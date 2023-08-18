@@ -1,0 +1,204 @@
+{
+    "id": "gid://shopify/Collection/{{faker 'number.int' min=1000000000 max=9999999999}}",
+    "description": {{{nlbr (faker 'commerce.productDescription')}}},
+    "descriptionHtml": {{{nlbr (faker 'lorem.lines' min=3 max=5)}}},
+    {{#unless (get path="ms-collection-no-image" context=context.headers)}}
+        "image": {{> image (faker "lorem.slug")}},
+    {{/unless}}
+    "onlineStoreUrl": "{{faker 'internet.url'}}",
+    "title": "{{faker 'commerce.productAdjective'}}",
+    "updatedAt": "{{faker 'date.recent'}}",
+    "handle": "{{faker 'lorem.slug' 5}}",        
+    "products": {
+        "pageInfo": {{> cursor}},
+        "filters": [
+            {{#unless (get path="ms-collection-no-filters" context=context.headers)}}
+                {
+                        "id": "filter.p.type",
+                        "label": "Product Type",
+                        "type": "LIST",
+                        "values": [
+                            {{#repeat 3}}
+                                {
+                                    "id": "filter.p.type{{@index}}",
+                                    "label": "{{faker 'lorem.word'}}",
+                                    "count": {{faker 'number.int' min=1 max=10}},
+                                    "input": "{\"productType\":\"{{faker 'lorem.words' max=1}}\"}"
+                                }
+                            {{/repeat}}
+                        ]
+                },
+                {
+                        "id": "filter.p.vendor",
+                        "label": "Vendor",
+                        "type": "LIST",
+                        "values": [
+                            {{#repeat 3}}
+                                {
+                                    "id": "filter.p.vendor{{@index}}",
+                                    "label": "{{faker 'company.name'}}",
+                                    "count": {{faker 'number.int' min=1 max=10}},
+                                    "input": "{\"productVendor\":\"{{faker 'company.name'}}\"}"
+                                }
+                            {{/repeat}}
+                        ]
+                },
+                {
+                    "id": "filter.p.price",
+                    "label": "Price",
+                    "type": "PRICE_RANGE",
+                    "values": [
+                        {
+                            "id": "filter.p.price1",
+                            "label": "Under $25",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"priceRange\":{\"min\":0,\"max\":25}}"
+                        },
+                        {
+                            "id": "filter.p.price2",
+                            "label": "$25 to $50",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"priceRange\":{\"min\":25,\"max\":50}}"
+                        },
+                        {
+                            "id": "filter.p.price3",
+                            "label": "$50 to $100",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"priceRange\":{\"min\":50,\"max\":100}}"
+                        },
+                        {
+                            "id": "filter.p.price4",
+                            "label": "$100 to $200",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"priceRange\":{\"min\":100,\"max\":200}}"
+                        },
+                        {
+                            "id": "filter.p.price5",
+                            "label": "$200 & Above",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"priceRange\":{\"min\":200,\"max\":null}}"
+                        }
+                    ]
+                },
+                {
+                    "id": "filter.p.tag",
+                    "label": "Product Material",
+                    "type": "LIST",
+                    "values": [
+                        {{#repeat 3}}
+                            {
+                                "id": "filter.p.tag{{@index}}",
+                                "label": "{{{faker 'commerce.productMaterial'}}}",
+                                "count": {{faker 'number.int' min=1 max=10}},
+                                "input": "{\"tag\":\"{{faker 'lorem.word'}}\"}"
+                            }
+                        {{/repeat}}
+                    ]
+                },
+                {
+                    "id": "filter.p.available",
+                    "label": "Availability",
+                    "type": "LIST",
+                    "values": [
+                        {
+                            "id": "filter.p.available1",
+                            "label": "Online Only",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"availableForSale\":true}"
+                        },
+                        {
+                            "id": "filter.p.available2",
+                            "label": "In Store Only",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"availableForSale\":false}"
+                        }
+                    ]
+                },
+                {
+                    "id": "filter.p.sort",
+                    "label": "Sort By",
+                    "type": "LIST",
+                    "values": [
+                        {
+                            "id": "filter.p.sort1",
+                            "label": "Best Selling",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"sortKey\":\"BEST_SELLING\"}"
+                        },
+                        {
+                            "id": "filter.p.sort2",
+                            "label": "Alphabetically, A-Z",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"sortKey\":\"TITLE\",\"reverse\":false}"
+                        },
+                        {
+                            "id": "filter.p.sort3",
+                            "label": "Alphabetically, Z-A",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"sortKey\":\"TITLE\",\"reverse\":true}"
+                        },
+                        {
+                            "id": "filter.p.sort4",
+                            "label": "Price, low to high",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"sortKey\":\"PRICE\",\"reverse\":false}"
+                        },
+                        {
+                            "id": "filter.p.sort5",
+                            "label": "Price, high to low",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"sortKey\":\"PRICE\",\"reverse\":true}"
+                        },
+                        {
+                            "id": "filter.p.sort6",
+                            "label": "Date, new to old",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"sortKey\":\"CREATED_AT\",\"reverse\":false}"
+                        },
+                        {
+                            "id": "filter.p.sort7",
+                            "label": "Date, old to new",
+                            "count": {{faker 'number.int' min=1 max=10}},
+                            "input": "{\"sortKey\":\"CREATED_AT\",\"reverse\":true}"
+                        }
+                    ]
+                },
+                {
+                    "id": "filter.v.option.color",
+                    "label": "Color",
+                    "type": "LIST",
+                    "values": [
+                        {
+                            "id": "filter.v.option.colorblue",
+                            "label": "Blue",
+                            "count": 1,
+                            "input": "{\"variantOption\":{\"name\":\"color\",\"value\":\"blue\"}}"
+                        },
+                        {
+                            "id": "filter.v.option.colorred",
+                            "label": "Red",
+                            "count": 1,
+                            "input": "{\"variantOption\":{\"name\":\"color\",\"value\":\"red\"}}"
+                        }
+                    ]
+                }
+            {{/unless}}
+        ],
+        "edges": [
+            {{#unless (get path="ms-collection-no-products" context=context.headers)}}
+                {{#repeat products_total}}
+                    {
+                        "node": {{> product available=true}}
+                    }
+                {{/repeat}}
+            {{/unless}}
+        ],
+        "nodes": [
+            {{#unless (get path="ms-collection-no-products" context=context.headers)}}
+                {{#repeat products_total}}
+                    {{> product available=true}}
+                {{/repeat}}
+            {{/unless}}
+        ]
+    }
+}

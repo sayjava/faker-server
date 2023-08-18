@@ -1,0 +1,53 @@
+{
+    "id": "{{faker "string.uuid"}}",
+    "acceptsMarketing": true,
+    "createdAt": "{{faker "date.recent"}}",
+    "updatedAt": "{{faker "date.recent"}}",
+    "displayName": "{{faker "person.firstName"}} {{faker "person.lastName"}}",
+    "email": "{{faker "internet.email"}}",
+    "firstName": "{{faker "person.firstName"}}",
+    "lastName": "{{faker "person.lastName"}}",
+    "numberOfOrders": {{faker "number.int" min=0 max=50}},
+    "phone": "{{faker "phone.number" "+4891#######" }}",
+    "tags": [
+        "{{faker "lorem.word"}}",
+        "{{faker "lorem.word"}}"
+    ],
+    "defaultAddress": {{> address}},
+    "addresses": {
+        "edges": [
+            {{#repeat 3}}
+                {
+                    "node": {{> address}}
+                }
+            {{/repeat}}
+        ],
+        "nodes": [
+            {{#repeat 3}}
+                {{> address}}
+            {{/repeat}}
+        ],
+        "pageInfo": {
+            "hasNextPage": false,
+            "hasPreviousPage": false
+        }
+    },
+    "orders": {
+        "edges": [
+            {{#repeat 3}}
+                {
+                    "node": {{> order}}
+                }
+            {{/repeat}}
+        ],
+        "nodes": [
+            {{#repeat 3}}
+                {{> order}}
+            {{/repeat}}
+        ],
+        "pageInfo": {
+            "hasNextPage": false,
+            "hasPreviousPage": false
+        }
+    }
+}

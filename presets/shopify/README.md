@@ -103,8 +103,29 @@ a real images.
 
 ## Internationalization
 
-`Mock Shopify` supports internalization in a limited capacity. It uses headers
-to simulate different currencies and languages.
+`Mock Shopify` supports internalization. The default locale is `en`. To change the locale which mostly affects the currency, use the `country` variable.
+
+The example query below will return the cart in the `FR` (French) locale
+
+```graphql copy
+query CartQuery($country: CountryCode = ZZ, $language: LanguageCode) @inContext(country: $country, language: $language) {
+  cart(id: "some-cart-id") {
+    cost {
+      totalAmount {
+        amount
+        currencyCode
+      }
+    }
+  }
+}
+```
+
+```json copy
+{
+  "country": "FR",
+  "language": "fr"
+}
+```
 
 ## Products
 

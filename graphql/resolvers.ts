@@ -50,6 +50,15 @@ const watchPartials = async (templateDir: string) => {
   }
 };
 
+const getExtraContext = (templateDir: string) => {
+  try {
+    const text = Deno.readTextFileSync([templateDir, "context.json"].join("/"));
+    return JSON.parse(text);
+  } catch {
+    return {};
+  }
+}
+
 const makeResolvers = (
   fields: { [key: string]: any },
   templateDir: string,
@@ -85,7 +94,8 @@ const makeResolvers = (
         preventIndent: false,
       });
 
-      const content = compileFunc({ context: { tree, ...ctx } });
+      const extraContext = getExtraContext(templateDir);
+      const content = compileFunc({ context: { tree, ...extraContext, ...ctx } });
       if (content === "") {
         return null
       }

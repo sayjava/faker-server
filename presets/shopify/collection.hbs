@@ -4,8 +4,8 @@
     - No collection found
     - No products in collection
  --}}
-{{#unless (get path="ms-collection-not-found" context=context.headers)}}
-   {{#if (get path="ms-collection-no-products" context=context.headers)}}
+{{#unless (eq context.tree.collection.__args.handle "not-found-collection")}}
+   {{#if (eq context.tree.collection.__args.handle "no-items-collection")}}
         {{> collection products_total=0}}
     {{else}}
         {{> collection products_total=(select context.tree.collection.products.__args.first 10) }}

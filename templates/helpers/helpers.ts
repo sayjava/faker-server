@@ -9,3 +9,5 @@ import "./missing.ts";
 import "./select.ts";
 import "./eq.ts";
 import "./get.ts";
+import "./contains.ts";
+import "./object.ts";

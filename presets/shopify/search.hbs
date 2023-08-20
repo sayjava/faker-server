@@ -52,8 +52,8 @@
         }
     ],
     "edges": [
-        {{#unless (get path="ms-search-no-results" context=context.headers)}}
-            {{#repeat (faker "number.int" min=10 max=20)}}
+        {{#unless (eq context.tree.search.__args.query "no-results")}}
+            {{#repeat (select context.tree.search.__args.first 10)}} 
                 {
                     "cursor": "next-cursor",
                     "node": {{> product }}
@@ -62,13 +62,13 @@
         {{/unless}}
     ],
     "nodes": [
-        {{#unless (get path="ms-search-no-results" context=context.headers)}}
-            {{#repeat (faker "number.int" min=10 max=20)}} 
+        {{#unless (eq context.tree.search.__args.query "no-results")}}
+            {{#repeat (select context.tree.search.__args.first 10)}} 
                 {{> product }}
             {{/repeat}}
         {{/unless}}
     ],
-    {{#if (get path="ms-search-no-results" context=context.headers)}}
+    {{#if (eq context.tree.search.__args.query "no-results")}}
         "totalCount": 0
     {{else}}
         "totalCount": {{select context.tree.search.__args.first 20}}

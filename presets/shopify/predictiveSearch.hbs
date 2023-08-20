@@ -10,30 +10,30 @@
         }
     ],
     "products": [
-        {{#unless (get path="ms-predictive-search-no-results" context=context.headers)}}
-            {{#repeat 10}}
-                {{> product}}
+        {{#unless (eq context.tree.predictiveSearch.__args.query "no-results")}}
+            {{#repeat (select context.tree.predictiveSearch.__args.first 10)}} 
+                {{> product }}
             {{/repeat}}
         {{/unless}}
     ],
     "collections": [
-        {{#unless (get path="ms-predictive-search-no-results" context=context.headers)}}
-            {{#repeat 10}}
-                {{> collection}}
+         {{#unless (eq context.tree.predictiveSearch.__args.query "no-results")}}
+            {{#repeat (select context.tree.predictiveSearch.__args.first 10)}} 
+                {{> collection }}
             {{/repeat}}
         {{/unless}}
     ],
     "articles": [
-        {{#unless (get path="ms-predictive-search-no-results" context=context.headers)}}
-            {{#repeat 10}}
-                {{> article}}
+        {{#unless (eq context.tree.predictiveSearch.__args.query "no-results")}}
+            {{#repeat (select context.tree.predictiveSearch.__args.first 10)}} 
+                {{> article }}
             {{/repeat}}
         {{/unless}}
     ],
     "pages": [
-        {{#unless (get path="ms-predictive-search-no-results" context=context.headers)}}
-            {{#repeat 10}}
-                {{> page}}
+        {{#unless (eq context.tree.predictiveSearch.__args.query "no-results")}}
+            {{#repeat (select context.tree.predictiveSearch.__args.first 10)}} 
+                {{> page }}
             {{/repeat}}
         {{/unless}}
     ]

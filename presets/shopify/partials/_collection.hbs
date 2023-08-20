@@ -10,9 +10,9 @@
     "updatedAt": "{{faker 'date.recent'}}",
     "handle": "{{faker 'lorem.slug' 5}}",        
     "products": {
-        "pageInfo": {{> cursor}},
+        "pageInfo": {{#unless (eq products_total 0)}} {{> cursor}} {{else}} {{> cursor noNextPage=true noPreviousPage=true}} {{/unless}},
         "filters": [
-            {{#unless (get path="ms-collection-no-filters" context=context.headers)}}
+            {{#unless no_filters}}
                 {
                         "id": "filter.p.type",
                         "label": "Product Type",
@@ -185,20 +185,16 @@
             {{/unless}}
         ],
         "edges": [
-            {{#unless (get path="ms-collection-no-products" context=context.headers)}}
-                {{#repeat products_total}}
-                    {
-                        "node": {{> product available=true}}
-                    }
-                {{/repeat}}
-            {{/unless}}
+            {{#repeat products_total}}
+                {
+                    "node": {{> product available=true}}
+                }
+            {{/repeat}}
         ],
         "nodes": [
-            {{#unless (get path="ms-collection-no-products" context=context.headers)}}
-                {{#repeat products_total}}
-                    {{> product available=true}}
-                {{/repeat}}
-            {{/unless}}
+            {{#repeat products_total}}
+                {{> product available=true}}
+            {{/repeat}}
         ]
     }
 }

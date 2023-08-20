@@ -40,7 +40,6 @@
                 "amount": {{faker "number.float" min=1 max=100 precision=0.1}},
                 {{!-- TODO: Implement internationalization here--}}
                 "currencyCode": "USD",
-
                 "percentage": {{faker "number.int" min=1 max=100 precision=0.1}}
             }
         },
@@ -99,7 +98,7 @@
 {
     "__typename": "Product",
     "id": "gid://shopify/Product/{{faker 'number.int' min=1000000000 max=9999999999}}",
-    "availableForSale": {{#if (get path="ms-product-out-of-stock" context=context.headers) }} false {{else}} true {{/if}},
+    "availableForSale": {{#if (eq context.tree.product.__args.handle "out-of-stock-product") }} false {{else}} true {{/if}},
     "title": "{{faker 'commerce.productName' }}",
     "productType": "{{faker 'commerce.productAdjective' }}",
     "createdAt": "{{faker 'date.recent' }}",
@@ -107,25 +106,32 @@
     "vendor": "{{faker 'company.name' }}",
     "description": {{{nlbr (faker 'commerce.productDescription')}}},
     "descriptionHtml": {{{nlbr (faker 'lorem.lines' min=5 max=10)}}},
-    "isGiftCard": {{#if (get path="ms-product-giftcard" context=context.headers) }} false {{else}} true {{/if}},
-    "totalInventory": {{#if (get path="ms-product-out-of-stock" context=context.headers)}}0{{else}}{{faker 'number.int' min=10 max=10000}}{{/if}},
+    "isGiftCard": {{#if (eq context.tree.product.__args.handle "giftcard-product")}} true {{else}} false {{/if}},
+    "totalInventory": {{#if (eq context.tree.product.__args.handle "out-of-stock-product")}}0{{else}}{{faker 'number.int' min=10 max=10000}}{{/if}},
     "tags": [
         {{#repeat 3}}
-            "{{faker 'lorem.word'}}"   
+            "{{faker 'commerce.productMaterial'}}"   
         {{/repeat}}
     ],
     "options": [
-        {{#repeat 3}}
-            {
-                "id": "{{faker 'string.alphanumeric' 5}}",
-                "name": "{{faker 'lorem.word' }}",
-                "values": [
-                    {{#repeat 3}}
-                        "{{faker 'lorem.word' }}"
-                    {{/repeat}}
-                ]
-            }
-        {{/repeat}}
+        {
+            "id": "{{faker 'string.alphanumeric' 5}}",
+            "name": "Materials",
+            "values": [
+                {{#repeat 3}}
+                    "{{faker 'commerce.productMaterial' }}"
+                {{/repeat}}
+            ]
+        },
+         {
+            "id": "{{faker 'string.alphanumeric' 5}}",
+            "name": "Colors",
+            "values": [
+                {{#repeat 3}}
+                    "{{faker 'vehicle.color' }}"
+                {{/repeat}}
+            ]
+        }
     ],
     "priceRange": {
         "maxVariantPrice": {{> money}},
@@ -151,7 +157,7 @@
         ]
     },
     "metafields":[
-        {{#unless (get path="ms-product-no-metafields" context=context.headers)}}
+        {{#unless (eq context.tree.product.__args.handle "no-metafields-product")}}
             {
                 "key": "rating",
                 "namespace": "custom",
@@ -195,18 +201,18 @@
     "variants": {
         "pageInfo": {{> cursor}},
         "edges": [
-            {{#unless (get path="ms-product-no-variants" context=context.headers)}}
+            {{#unless (eq context.tree.product.__args.handle "no-variants-product")}}
                 {{#repeat 3}}
                     {
-                        "node": {{> product-variant }}
+                        "node": {{> product-variant on_sale=(eq context.tree.product.__args.handle "on-sale-product") out_of_stock=(eq context.tree.product.__args.handle "out-of-stock-product") }}
                     }
                 {{/repeat}}
             {{/unless}}
         ],
         "nodes": [
-             {{#unless (get path="ms-product-no-variants" context=context.headers)}}
+             {{#unless (eq context.tree.product.__args.handle "no-variants-product")}}
                 {{#repeat 3}}
-                    {{> product-variant }}
+                    {{> product-variant on_sale=(eq context.tree.product.__args.handle "on-sale-product") out_of_stock=(eq context.tree.product.__args.handle "out-of-stock-product") }}
                 {{/repeat}}
             {{/unless}}
         ]
@@ -226,11 +232,11 @@
             {{/repeat}}
         ]
     },
-    "requiresSellingPlan": {{get path="ms-product-subscription" context=context.headers default=false}},
+    "requiresSellingPlan": {{eq context.tree.product.__args.handle "subscription-product"}},
     "sellingPlanGroups": {
         "pageInfo": {{> cursor}},
         "edges": [
-            {{#if (get path="ms-product-subscription" context=context.headers)}}
+            {{#if (eq context.tree.product.__args.handle "subscription-product")}}
                 {{#repeat 2}}
                     {
                         "node": {{> selling-plan-group}}
@@ -239,7 +245,7 @@
             {{/if}}
         ],
         "nodes": [
-             {{#if (get path="ms-product-subscription" context=context.headers)}}
+             {{#if (eq context.tree.product.__args.handle "subscription-product")}}
                 {{#repeat 2}}
                     {{> selling-plan-group}}
                 {{/repeat}}
@@ -255,5 +261,5 @@
         "description": "{{faker 'lorem.paragraph'}}",
         "title": "{{faker 'commerce.productName'}}"
     },
-    "variantBySelectedOptions": {{> product-variant}}
+    "variantBySelectedOptions": {{> product-variant on_sale=(eq context.tree.product.__args.handle "on-sale-product") out_of_stock=(eq context.tree.product.__args.handle "out-of-stock-product") }}
 }

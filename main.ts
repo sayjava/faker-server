@@ -33,10 +33,12 @@ const server = new Server({
           resolvers,
         }),
         graphiql: true,
-        contextValue: {
-          headers,
-          variables,
-          templateDir: "presets/shopify",
+        context: (): any => {
+          return {
+            headers,
+            variables,
+            templateDir: "presets/shopify",
+          }
         },
       })(req);
       return response;

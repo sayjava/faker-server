@@ -2,14 +2,14 @@
     "id": "{{faker "number.int" min=100 max=10000}}",
     "brand": {
         "coverImage": {
-            "image": {{> image "quick"}},
+            "image": {{> image "mock"}},
             "alt": "Brand Cover",
-            "previewImage": {{> image "quick shop"}},
+            "previewImage": {{> image "mock shop"}},
             "mediaContentType": "IMAGE"
         }
     },
-    "description": "Quick Shopify Shop",
-    "name": "Quick Shopify Shop Ltd",
+    "description": "Mock Shopify Shop",
+    "name": "Mock Shopify Shop",
     "moneyFormat": "USD",
     "paymentSettings": {
         "acceptedCardBrands": [
@@ -30,37 +30,37 @@
         ]
     },
     "primaryDomain": {
-        "host": "quick-shopify.myshopify.com",
+        "host": "mock-shopify.faker-server.com",
         "sslEnabled": true,
-        "url": "https://quick-shopify.myshopify.com"
+        "url": "https://mock-shopify.faker-server.com"
     },
     "privacyPolicy": {
         "body": {{{nlbr (faker 'lorem.lines' min=3 max=5)}}},
         "id": "gid://shopify/ShopPolicy/{{faker "number.int" min=1 max=100}}",
         "title": "Privacy Policy",
         "handle": "privacy-policy",
-        "url": "https://quick-shopify.myshopify.com/policies/privacy-policy"
+        "url": "https://mock-shopify.faker-server.com/policies/privacy-policy"
     },
     "refundPolicy": {
         "body": {{{nlbr (faker 'lorem.lines' min=1 max=2)}}},
         "id": "gid://shopify/ShopPolicy/{{faker "number.int" min=1 max=100}}",
         "title": "Refund Policy",
         "handle": "refund-policy",
-        "url": "https://quick-shopify.myshopify.com/policies/refund-policy"
+        "url": "https://mock-shopify.faker-server.com/policies/refund-policy"
     },
     "termsOfService": {
         "body": {{{nlbr (faker 'lorem.lines' min=1 max=2)}}},
         "id": "gid://shopify/ShopPolicy/{{faker "number.int" min=1 max=100}}",
         "title": "Terms of Service",
         "handle": "terms-of-service",
-        "url": "https://quick-shopify.myshopify.com/policies/terms-of-service"
+        "url": "https://mock-shopify.faker-server.com/policies/terms-of-service"
     },
     "shippingPolicy": {
         "body": {{{nlbr (faker 'lorem.lines' min=1 max=2)}}},
         "id": "gid://shopify/ShopPolicy/{{faker "number.int" min=1 max=100}}",
         "title": "Shipping Policy",
         "handle": "shipping-policy",
-        "url": "https://quick-shopify.myshopify.com/policies/shipping-policy"
+        "url": "https://mock-shopify.faker-server.com/policies/shipping-policy"
     },
     "shipsToCountries": [
         "US",

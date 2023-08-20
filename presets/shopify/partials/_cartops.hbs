@@ -1,17 +1,12 @@
 {
-    "cart": {{> cart}},
+    "cart": {{> cart num_of_lines=(select num_of_lines 5)}},
     "userErrors": [
-        {{#if (eq (get path="ms-cart-error-code" context=context.headers)) }}
-            {{#repeat 3}}
-                {
-                    "message": "Error: {{get path="ms-cart-error-message" context=context.headers default="Could not add item to the cart"}}",
-                    "field": [
-                        "cartLines",
-                        "quantity"
-                    ],
-                    "code": "{{get path="ms-cart-error-code" context=context.headers default="INVALID"}}"
-                }
-            {{/repeat}}
+        {{#if error}}
+            {
+                "message": "{{error.message}}",
+                "field": ["{{error.field}}"],
+                "code": "{{error.code}}"
+            }
         {{/if}}
     ]
 }

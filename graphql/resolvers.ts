@@ -85,7 +85,11 @@ const makeResolvers = (
         preventIndent: false,
       });
 
-      const content = compileFunc({ tree, ...ctx });
+      const content = compileFunc({ context: { tree, ...ctx } });
+      if (content === "") {
+        return null
+      }
+      
       return JSON.parse(content);
     };
 

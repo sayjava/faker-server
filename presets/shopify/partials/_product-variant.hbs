@@ -2,20 +2,22 @@
    "__typename": "ProductVariant",
    "id": "gid://shopify/ProductVariant/{{faker "string.uuid" }}",
    "barcode": "{{faker "string.alphanumeric" 5}}",
-   "availableForSale": {{get path="ms-product-out-of-stock" context=context.headers default=true}},
+   "availableForSale": {{#if out_of_stock }} false {{else}} true {{/if}},
    "barcode": "{{faker "string.alphanumeric" 10}}",
+   {{#if on_sale }}
    "compareAtPrice": {{> money}},
-   "currentlyNotInStock": {{get path="ms-product-out-of-stock" context=context.headers default=true}},
+   {{/if}}
+   "currentlyNotInStock": {{#if out_of_stock }} true {{else}} false {{/if}},
    "image": {{> image}},
    "price": {{> money}},
-   "quantityAvailable": {{#if (get path="ms-product-out-of-stock" context=context.headers) }} 0 {{else}} 10 {{/if}},
+   "quantityAvailable": {{#if out_of_stock }} 0 {{else}} 10 {{/if}},
    "requiresShipping": true,
    "sku": "{{faker "string.alphanumeric" 5}}",
    "selectedOptions": [
         {{#repeat 3}}
             {
-                "name": "{{{faker "commerce.productMaterial"}}}",
-                "value": "{{{faker "commerce.productMaterial"}}}"
+                "name": "Materials",
+                "value": "{{faker "commerce.productMaterial"}}"
             }
         {{/repeat}}
     ],
@@ -25,7 +27,7 @@
    "priceV2": {{> money}},
    "options": [{
         "id": "{{faker "string.alphanumeric" 5}}",
-        "name": "{{{faker "commerce.productMaterial"}}}",
+        "name": "Materials",
         "values": [
             {{#repeat 3}}
                 "{{{faker "commerce.productMaterial"}}}"
@@ -42,7 +44,7 @@
     "product": {
         "__typename": "Product",
         "id": "gid://shopify/Product/{{faker 'number.int' min=1000000000 max=9999999999}}",
-        "availableForSale": {{#if (get path="ms-product-out-of-stock" context=context.headers) }} false {{else}} true {{/if}},
+        "availableForSale": {{#if out_of_stock }} true {{else}} false {{/if}},
         "title": "{{faker 'commerce.productName' }}",
         "productType": "{{faker 'commerce.productAdjective' }}",
         "createdAt": "{{faker 'date.recent' }}",
@@ -50,8 +52,8 @@
         "vendor": "{{faker 'company.name' }}",
         "description": {{{nlbr (faker 'commerce.productDescription')}}},
         "descriptionHtml": {{{nlbr (faker 'lorem.lines' min=5 max=10)}}},
-        "isGiftCard": {{#if (get path="ms-product-giftcard" context=context.headers) }} false {{else}} true {{/if}},
-        "totalInventory": {{#if (get path="ms-product-out-of-stock" context=context.headers)}}0{{else}}{{faker 'number.int' min=10 max=10000}}{{/if}},
+        "isGiftCard": false,
+        "totalInventory": {{#if out_of_stock }} 0 {{else}} 10 {{/if}},
         "priceRange": {
             "maxVariantPrice": {{> money}},
             "minVariantPrice": {{> money}}

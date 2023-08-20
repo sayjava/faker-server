@@ -14,7 +14,7 @@
 
 {
     "__typename": "Order",
-    "id": "{{faker "string.uuid"}}",
+    "id": "{{faker "number.int" min=100 max=999}}",
     "name": "{{faker "person.firstName"}} {{faker "person.lastName"}}",
     "email": "{{faker "internet.email"}}",
     "phone": "{{faker "phone.number"}}",

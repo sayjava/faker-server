@@ -1,7 +1,22 @@
-{
-    "customerAccessToken": {
-        "accessToken": "{{faker "string.uuid"}}",
-        "expiresAt": "{{faker "date.future" years=1}}"
-    },
-    "customerUserErrors": []
-}
+{{#if (eq context.tree.customerAccessTokenCreate.__args.input.email "wrong-user@example.com")}}
+    {
+        "customerUserErrors": [
+            {
+                "field": [
+                    "email"
+                ],
+                "message": "The email provided is invalid. please use a valid email address."
+            }
+        ]
+    }
+{{/if}}
+
+{{#unless (eq context.tree.customerAccessTokenCreate.__args.input.email "wrong-user@example.com")}}
+    {
+        "customerAccessToken": {
+            "accessToken": "{{faker "string.uuid"}}",
+            "expiresAt": "{{faker "date.future" years=1}}"
+        },
+        "customerUserErrors": []
+    }
+{{/unless}}

@@ -1,5 +1,5 @@
 [
-    {{#unless (get path="ms-product-no-recommendations" context=context.headers)}}
+    {{#unless (eq context.tree.productRecommendations.__args.productId "no-recommendation-product")}}
         {{#repeat 5}} 
             {{> product }}
         {{/repeat}}

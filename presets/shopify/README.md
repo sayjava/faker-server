@@ -11,94 +11,90 @@ having to connect to a real Shopify store. `Mock Shopify` is built on top of
 [Shopify Storefront API](https://shopify.dev/docs/storefront-api) to provide a
 mock Shopify API.
 
-> [!NOTE] Shopify GraphQL API Version 2023-07
+> [!NOTE] Mock Shopify GraphQL API was built to the specification of the Version
+> 2023-07 of the GraphQL API
 
-- [Mock Shopify Guide](#mock-shopify-guide)
-  - [Getting Started](#getting-started)
-    - [How It Works](#how-it-works)
-    - [Supported Operations](#supported-operations)
-    - [Simulating Alternative States](#simulating-alternative-states)
-  - [Internationalization](#internationalization)
-    - [Internationalization Control headers](#internationalization-control-headers)
-  - [Products](#products)
-    - [Product Control headers](#product-control-headers)
-    - [Product Recommendations](#product-recommendations)
-    - [Product Recommendation Control headers](#product-recommendation-control-headers)
-  - [Collection(s)](#collection-s-)
-    - [Collection Filters](#collection-filters)
-  - [Cart](#cart)
-    - [Cart Control headers](#cart-control-headers)
-  - [Search](#search)
-    - [Search Control headers](#search-control-headers)
-  - [Predictive Search](#predictive-search)
-    - [Predictive Search Control headers](#predictive-search-control-headers)
-  - [Checkout](#checkout)
-
-## Getting Started
-
-Just point your application to the `Mock Shopify` GraphQL endpoint at
-`https://mock-shopify.run/api/2023-07/graphql.json` and you're good to go.
-
-### How It Works
-
-It uses [fakerjs](https://fakerjs.dev/) to generate simulated data in the
-response and these responses are created using
-[handlebars](https://handlebarsjs.com/) templates in this repository.
-
-### Supported Operations
+## Supported Shopify Operations
 
 These are the currently supported operations. Operations that are not supported
 returns an error.
 
 - [x] Shop
 - [x] Product(s)
+  - [x] Recommendations
+  - [x] Variants
+  - [x] Metafields
 - [x] Collection(s)
 - [x] Cart
 - [x] Checkout
 - [x] Search
 - [x] Predictive Search
-- [ ] Customer(s) (Coming Soon)
-- [ ] Order(s) (Coming Soon)
+- [x] Customer
+  - [x] Customer Orders
+  - [x] Authentication
+  - [x] Password Reset
+  - [x] MailingAddress
+    - [x] Create
+    - [x] Updated
+    - [x] Delete
+- [x] Pages
+- [x] Blogs
+- [x] Articles
 - [ ] Payment(s) (Coming Soon)
 - [ ] Shipping Rates (Coming Soon)
 
-### Simulating Alternative States
+> [!NOTE] If there are properties that are missing, bugs or useful operations,
+> please raise an issue on this repo.
 
-`Mock Shopify` supports alternative states for products, collections and carts.
-This allows developers to build out UI components to reflect different states of
-a product, collection or cart. For example, a developer can build out a product
-UI component to reflect a product that is out of stock or a cart UI component to
-reflect a cart with discounts.
+## Getting Started
 
-This is achieved by using control headers. Control headers are headers that are
-used to control the state of the API. For example, if you want to simulate a
-product that is out of stock, you would set the `ms-product-out-of-stock` Header
-to `true`. This will return a product that is out of stock.
+### Shopify Hydrogen
 
-Example
+`Mock Shopify` was tested with Shopify official storefront starter template
+called [`Hydrogen`](https://hydrogen.shopify.dev/).
 
-```javascript
-// Simulates a product that is out of stock
-await fetch("https://Mock shopify.vercel.app/api/headers", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "ms-product-out-of-stock": true,
-  },
-  body: JSON.stringify({
-    query: `
-      query {
-        product(id: "gid://shopify/Product/123456789") {
-          availableForSale
-        }
-      }
-    `,
-  }),
-});
+- Follow the [instructions](https://hydrogen.shopify.dev/) to create a new
+  storefront with Hydrogen
+- Change the shopify domain to the mock shopify URL in the `.env` file
+
+See a test storefront here using the hydrogen template.
+[Hydrogen Storefront](https://hydrogen-shopify.faker-server.com)
+
+### NextJS E-Commerce
+
+- Clone the NextJS commerce repo
+- Follow the instructions to run the application
+- Change the shopify domain to the mock shopify URL in the `.env` file
+
+See a test storefront here using the hydrogen template.
+[NextJS Storefront](https://nextjs-shopify.faker-server.com)
+
+### Custom Setup
+
+If you are using a custom setup, then just point your application to the mock
+shopify endpoint
+
+## Local/Offline Setup
+
+The `Mock Shopify` can run locally on a developer's machine.
+
+```sh
+docker run grc.io/sayjava/faker-server -p 8080:8080 --preset=shopify
 ```
 
-> [!NOTE] All control headers are prefixed with `ms-` to avoid conflicts with
-> other headers.
+> [!Note] SSL self signed certificate issues
+
+### Docker
+
+### Deno
+
+## Development
+
+## How It Works
+
+It uses [fakerjs](https://fakerjs.dev/) to generate simulated data in the
+response and these responses are created using
+[handlebars](https://handlebarsjs.com/) templates in this repository.
 
 ### Mock Images
 
@@ -110,54 +106,47 @@ a real images.
 `Mock Shopify` supports internalization in a limited capacity. It uses headers
 to simulate different currencies and languages.
 
-### Internationalization Control headers
-
-| Header             | Description                                            |
-| ------------------ | ------------------------------------------------------ |
-| `ms-shop-currency` | Simulates the currency of prices, it defaults to "USD" |
-| `ms-shop-language` | Simulates the language of the shop, defaults to "EN"   |
-
 ## Products
 
-Querying for a product by `id` will return a product. This allows developers to
-build out product UI components to reflect different product state.
-
-Example Query
-
-```graphql copy
-query {
-    product(id: "gid://shopify/Product/123456789") {
-        title
-        description
-        featuredImage {
-            url
-        }
-        priceRange {
-            minVariantPrice {
-                amount
-            }
-        }
-    }
-}
-```
+Fetch products using the Shopify product ID or product handle. This allows you
+to build out product UI components to reflect different product state.
 
 > [!NOTE] All product properties supported by the Shopify Storefront API are
 > supported by `Mock Shopify`. For a full list of properties, please see the
-> [Shopify Storefront API](https://shopify.dev/docs/storefront-api/reference/products/product).
+> [Shopify Storefront API](https://shopify.dev/docs/api/storefront/2023-07/objects/product).
 
-To control the state of the product(s) that is returned, `Mock Shopify` supports
-the following control headers.
+> [!NOTE] The `Mock Shopify` product response will always return a product
+> regardless of the product ID or handle. This allows developers to build out
+> product UI components to reflect different product state.
 
-### Product Control headers
+> [!NOTE] The `Mock Shopify` product images are placeholders appropriately
+> sized.
 
-| Header                     | Description                                        |
-| -------------------------- | -------------------------------------------------- |
-| `ms-product-out-of-stock`  | Simulates a product that is out of stock           |
-| `ms-product-giftcard`      | Simulates a product that is a gift card            |
-| `ms-product-subscription`  | Simulates a product that is a subscription product |
-| `ms-product-not-found`     | Simulates a product that is not found              |
-| `ms-product-no-metafields` | Simulates a product that has no metafields         |
-| `ms-product-no-variants`   | Simulates a product that has no variants           |
+### Alternative Product Scenarios
+
+Easily simulate different product scenarios using these product handles.
+
+| Product Handle          | Description                                        |
+| ----------------------- | -------------------------------------------------- |
+| `out-of-stock-product`  | Simulates a product that is out of stock           |
+| `giftcard-product`      | Simulates a product that is a gift card            |
+| `subscription-product`  | Simulates a product that is a subscription product |
+| `not-found-product`     | Simulates a product that is not found              |
+| `no-metafields-product` | Simulates a product that has no metafields         |
+| `no-variants-product`   | Simulates a product that has no variants           |
+| `on-sale-product`       | Simulates a product that is on sale                |
+
+Example
+
+The following query will return a product that is out of stock
+
+```graphql copy
+query {
+  product(handle: "out-of-stock-product") {
+    availableForSale
+  }
+}
+```
 
 ### Product Recommendations
 
@@ -165,47 +154,40 @@ Product recommendations can be retrieved for a product using any product ID.
 `Mock Shopify` will return a simulated list of recommended products for any
 given product ID.
 
-### Product Recommendation Control headers
+### Alternative Product Recommendation Scenario
 
-| Header                          | Description                                 |
-| ------------------------------- | ------------------------------------------- |
-| `ms-product-no-recommendations` | Simulates a product that has no recommended |
-| products                        |                                             |
+Easily simulate different product recommendation scenarios using this product
+handles.
+
+| Product Handle               | Description                                 |
+| ---------------------------- | ------------------------------------------- |
+| `no-recommendations-product` | Simulates a product that has no recommended |
+| products                     |                                             |
 
 ## Collection(s)
 
-Mock Shopify allows developers to query collections by `id` or `handle`. This
-allows developers to build out collection UI components to reflect different
-collection state.
+`Mock Shopify` allows developers to query collections by `id` or `handle`. This
+allows you to build out collection UI components to reflect different collection
+state.
 
 > [!NOTE] All collection properties supported by the Shopify Storefront API are
 > supported by `Mock Shopify`. For a full list of properties, please see the
 > [Shopify Storefront API](https://shopify.dev/docs/api/storefront/2023-07/objects/Collection).
 
-Example Query
+> [!NOTE] The `Mock Shopify` collection response will always return a collection
 
-```graphql copy
-query {
-  # This will return 10 products
-  collections(first: 10) {
-    nodes {
-      id
-      description
-    }
-  }
-}
-```
+### Alternative Collection Scenarios
 
-**Collection Control headers** | Header | Description | |--|--| |
-`ms-collection-no-collections` | Simulates a an empty list of collections | |
-`ms-collection-no-products` | Simulates a collection that has no products | |
-`ms-collection-no-image` | Simulates a collection that has no image | |
-`ms-collection-no-filters` | Simulates a collection that has no filters |
+Easily simulate different collection scenarios using these collection handles.
+
+| Handle                 | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `not-found-collection` | Simulates an unknown collection          |
+| `no-items-collection`  | Simulates a an empty list of collections |
 
 ### Collection Filters
 
-`Quick Shopify` supports collection filters. The following filters are
-supported:
+`Mock Shopify` supports collection filters. The following filters are supported:
 
 | Filter             | Description                                               | Type          |
 | ------------------ | --------------------------------------------------------- | ------------- |
@@ -223,6 +205,26 @@ Any cart id will always return a cart. This allows developers to build out cart
 UI components to reflect different cart state except for when using control
 headers.
 
+The number of items in the cart is determined by the `first` query argument of
+the `cart.lines` query.
+
+The below query will return the 2 items in the cart
+
+```graphql copy
+query {
+  cart(id: "cart-id") {
+    lines(first: 2) {
+      edges {
+        node {
+          id
+          quantity
+        }
+      }
+    }
+  }
+}
+```
+
 The following mutation cart operations are supported by `Mock Shopify`:
 
 - `cartCreate`
@@ -234,20 +236,16 @@ The following mutation cart operations are supported by `Mock Shopify`:
 - `cartPaymentUpdate`
 - `cartSubmitForCompletion`
 
-> [!IMPORTANT] Please not that Quick Shopify does not keep any state, therefore
+> [!IMPORTANT] Please not that `Mock Shopify` does not keep any state, therefore
 > any changes made to a cart will not persist. The basic operations will succeed
 > but the cart will not be updated.
 
-### Cart Control headers
+### Alternative Cart Scenarios
 
-| Header                        | Description                                   |
-| ----------------------------- | --------------------------------------------- |
-| `ms-cart-not-found`           | Simulates a cart that does not exist          |
-| `ms-cart-empty`               | Simulates a cart that is empty                |
-| `ms-cart-no-shipping-address` | Simulates a cart that has no shipping address |
-| `ms-cart-use-discount`        | Simulates a cart with applied discount codes  |
-| `ms-cart-error-code`          | Simulates a cart mutation user error          |
-| `ms-cart-error-message`       | Simulates a cart mutation user error message  |
+| Cart ID           | Description                                  |
+| ----------------- | -------------------------------------------- |
+| `empty-cart`      | Simulates a cart that is empty               |
+| `discounted-cart` | Simulates a cart with applied discount codes |
 
 > [!NOTE] See the
 > [Shopify Storefront API](https://shopify.dev/docs/api/storefront/2023-07/queries/cart)
@@ -259,11 +257,11 @@ The following mutation cart operations are supported by `Mock Shopify`:
 `Mock Shopify` supports product searches using all the arguments supported by
 the Shopify Storefront API.
 
-### Search Control headers
+### Alternative Search Scenarios
 
-| Header                 | Description                                |
-| ---------------------- | ------------------------------------------ |
-| `ms-search-no-results` | Simulates a search that returns no results |
+| Query      | Description                                |
+| ---------- | ------------------------------------------ |
+| `no items` | Simulates a search that returns no results |
 
 ## Predictive Search
 
@@ -272,12 +270,30 @@ predictive search will return a list of products and collections regardless of
 the search term. It will also return some random search suggestions queries
 perfect for build out UIs.
 
-### Predictive Search Control headers
+### Alternative Predictive Search Control headers
 
-| Header                            | Description                                           |
-| --------------------------------- | ----------------------------------------------------- |
-| `ms-predictive-search-no-results` | Simulates a predictive search that returns no results |
+| Header     | Description                                           |
+| ---------- | ----------------------------------------------------- |
+| `no items` | Simulates a predictive search that returns no results |
 
-## Checkout
+## Customer
 
-Coming soon
+`Mock Shopify` supports a few common customer operations
+
+- Create Customer
+- Authentication
+- Password Reset
+- Customer Orders
+- MailingAddress
+  - Create
+  - Updated
+  - Delete
+
+### Alternative Customer Scenarios
+
+When testing customer journeys, a couple of alternative journeys are available
+using special values as listed below in this table
+
+| Header                   | Description                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| `wrong-user@example.com` | If this specific email is supplied then the server will return an authentication error |

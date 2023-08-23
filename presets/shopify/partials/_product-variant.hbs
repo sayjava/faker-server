@@ -14,50 +14,97 @@
    "requiresShipping": true,
    "sku": "{{faker "string.alphanumeric" 5}}",
    "selectedOptions": [
-        {{#repeat 3}}
-            {
-                "name": "Materials",
-                "value": "{{faker "commerce.productMaterial"}}"
-            }
-        {{/repeat}}
+        {
+            "name": "Materials",
+            "value": "Metal"
+        },
+        {
+            "name": "Colors",
+            "value": "Red"
+        },
+        {
+            "name": "Sizes",
+            "value": "Small"
+        }
     ],
    "title": "{{faker "commerce.productName" }}",
    "image": {{> image}},
    "unitPrice": {{> money}},
    "priceV2": {{> money}},
-   "options": [{
-        "id": "{{faker "string.alphanumeric" 5}}",
-        "name": "Materials",
-        "values": [
-            {{#repeat 3}}
-                "{{{faker "commerce.productMaterial"}}}"
-            {{/repeat}}
-        ]
-    }],
-    "unitPriceMeasurement": {
+   "options": {{> product-options}},
+   "unitPriceMeasurement": {
         "measuredType": "VOLUME",
         "quantityUnit": "ML",
         "quantityValue": {{faker "number.int" min=10 max=1000}},
         "referenceUnit": "ML",
         "referenceValue": {{faker "number.int" min=10 max=1000}}
-    },
-    "product": {
+    }
+    {{!-- Stops an infinite recursion of templates --}}
+    {{#unless no_product}}
+    ,"product": {
         "__typename": "Product",
         "id": "gid://shopify/Product/{{faker 'number.int' min=1000000000 max=9999999999}}",
-        "availableForSale": {{#if out_of_stock }} true {{else}} false {{/if}},
+        "availableForSale": true,
         "title": "{{faker 'commerce.productName' }}",
         "productType": "{{faker 'commerce.productAdjective' }}",
         "createdAt": "{{faker 'date.recent' }}",
+        "publishedAt": "{{faker 'date.recent' }}",
+        "updatedAt": "{{faker 'date.recent' }}",
         "handle": "{{faker 'lorem.slug' 5}}",
         "vendor": "{{faker 'company.name' }}",
         "description": {{{nlbr (faker 'commerce.productDescription')}}},
         "descriptionHtml": {{{nlbr (faker 'lorem.lines' min=5 max=10)}}},
         "isGiftCard": false,
-        "totalInventory": {{#if out_of_stock }} 0 {{else}} 10 {{/if}},
+        "totalInventory": 10,
+        "seo": {
+            "description": "{{faker 'commerce.productDescription'}}",
+            "title": "{{faker 'commerce.productAdjective'}}"
+        },
         "priceRange": {
             "maxVariantPrice": {{> money}},
             "minVariantPrice": {{> money}}
         },
-        "featuredImage": {{> image}}
+        "featuredImage": {{> image}},
+        "options": {{> product-options}},
+        "price": {{> money}},
+        "featuredImage": {{> image}},
+        "tags": [
+            {{#repeat 3}}
+                "{{faker 'commerce.productMaterial'}}"
+            {{/repeat}}
+        ],
+        "images": {
+            "pageInfo": {
+                "hasNextPage": true,
+                "hasPreviousPage": false
+            },
+            "nodes": [
+                {{#repeat 5}}
+                    {{> image}}
+                {{/repeat}}
+            ],
+            "edges": [
+                {{#repeat 5}}
+                    {
+                        "node": {{> image}}
+                    }
+                {{/repeat}}
+            ]
+        },
+        "variants": {
+            "edges": [
+                {{#repeat 3}}
+                    {
+                        "node": {{> product-variant no_product=true}}
+                    }
+                {{/repeat}}
+            ],
+            "nodes": [
+                {{#repeat 3}}
+                    {{> product-variant no_product=true}}
+                {{/repeat}}
+            ]
+        }
     }
+    {{/unless}}
 }

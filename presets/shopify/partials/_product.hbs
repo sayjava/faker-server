@@ -103,37 +103,23 @@
     "productType": "{{faker 'commerce.productAdjective' }}",
     "createdAt": "{{faker 'date.recent' }}",
     "publishedAt": "{{faker 'date.recent' }}",
+    "updatedAt": "{{faker 'date.recent' }}",
     "handle": "{{faker 'lorem.slug' 5}}",
     "vendor": "{{faker 'company.name' }}",
     "description": {{{nlbr (faker 'commerce.productDescription')}}},
     "descriptionHtml": {{{nlbr (faker 'lorem.lines' min=5 max=10)}}},
     "isGiftCard": {{#if (eq context.tree.product.__args.handle "giftcard-product")}} true {{else}} false {{/if}},
     "totalInventory": {{#if (eq context.tree.product.__args.handle "out-of-stock-product")}}0{{else}}{{faker 'number.int' min=10 max=10000}}{{/if}},
+    "seo": {
+        "description": "{{faker 'commerce.productDescription'}}",
+        "title": "{{faker 'commerce.productAdjective'}}"
+    },
     "tags": [
         {{#repeat 3}}
             "{{faker 'commerce.productMaterial'}}"   
         {{/repeat}}
     ],
-    "options": [
-        {
-            "id": "{{faker 'string.alphanumeric' 5}}",
-            "name": "Materials",
-            "values": [
-                {{#repeat 3}}
-                    "{{faker 'commerce.productMaterial' }}"
-                {{/repeat}}
-            ]
-        },
-         {
-            "id": "{{faker 'string.alphanumeric' 5}}",
-            "name": "Colors",
-            "values": [
-                {{#repeat 3}}
-                    "{{faker 'vehicle.color' }}"
-                {{/repeat}}
-            ]
-        }
-    ],
+    "options": {{> product-options}},
     "priceRange": {
         "maxVariantPrice": {{> money}},
         "minVariantPrice": {{> money}}

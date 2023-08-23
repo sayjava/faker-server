@@ -2,13 +2,15 @@
     "id": "gid://shopify/Collection/{{faker 'number.int' min=1000000000 max=9999999999}}",
     "description": {{{nlbr (faker 'commerce.productDescription')}}},
     "descriptionHtml": {{{nlbr (faker 'lorem.lines' min=3 max=5)}}},
-    {{#unless (get path="ms-collection-no-image" context=context.headers)}}
-        "image": {{> image (faker "lorem.slug")}},
-    {{/unless}}
+    "image": {{> image (faker "lorem.slug")}},
     "onlineStoreUrl": "{{faker 'internet.url'}}",
     "title": "{{faker 'commerce.productAdjective'}}",
     "updatedAt": "{{faker 'date.recent'}}",
-    "handle": "{{faker 'lorem.slug' 5}}",        
+    "handle": "{{faker 'lorem.slug' 5}}",   
+    "seo": {
+        "description": "{{faker 'commerce.productDescription'}}",
+        "title": "{{faker 'commerce.productAdjective'}}"
+    },     
     "products": {
         "pageInfo": {{#unless (eq products_total 0)}} {{> cursor}} {{else}} {{> cursor noNextPage=true noPreviousPage=true}} {{/unless}},
         "filters": [

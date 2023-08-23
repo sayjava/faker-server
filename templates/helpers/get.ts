@@ -5,11 +5,11 @@ import { Handlebars, objectPath } from "../../deps.ts";
  */
 Handlebars.registerHelper("get", function (options) {
   if (!options.hash) {
-    throw new Error('Handlebars Helper "get" needs a path');
+    throw new Error('Handlebars Helper "get" needs a context and a path');
   }
   const { hash } = options;
-  if (!hash.path) {
-    throw new Error('Handlebars Helper "get" needs a path');
+  if (!hash.path && !hash.default) {
+    throw new Error('Handlebars Helper "get" needs a path or a default');
   }
 
   return objectPath.default.get(

@@ -1,5 +1,6 @@
 {
   "tasks": {
-    "dev": "deno run --allow-read --allow-net --watch main.ts"
+    "dev": "deno run --allow-read --allow-net --watch main.ts",
+    "dev:shopify": "deno run --allow-read --allow-net --watch main.ts --templates presets/shopify --tls"
   }
 }

@@ -1,47 +1,21 @@
-import {
-  buildClientSchema,
-  GraphQLHTTP,
-  makeExecutableSchema,
-  printSchema,
-  Server,
-} from "./deps.ts";
-import { createResolvers } from "./graphql/resolvers.ts";
+import { parser, Server } from "./deps.ts";
+import { createHandler as createGraphQLHandler } from "./graphql/handler.ts";
 import "./templates/helpers/helpers.ts";
 
-const schemaJSON = Deno.readTextFileSync("./presets/shopify/schema.json");
-const { data: introspection } = JSON.parse(schemaJSON);
-const schema = buildClientSchema(introspection);
-const resolvers = createResolvers({ schema, templateDir: "presets/shopify" });
+const {
+  tls,
+  port = 8080,
+  templates = "templates",
+} = parser.parse(Deno.args);
 
-interface ServerContext {
-  headers: { [key: string]: string };
-  variables: { [key: string]: string | number | boolean };
-  templateDir: string;
-}
+const graphqlHandler = createGraphQLHandler({ templateDir: templates });
 
 const server = new Server({
-  handler: async (req) => {
+  handler: (req) => {
     const { pathname } = new URL(req.url);
 
-    const cReq = req.clone();
-    const { variables, headers } = await cReq.json();
-
     if (pathname.includes("graphql")) {
-      const response = await GraphQLHTTP<Request>({
-        schema: makeExecutableSchema({
-          typeDefs: printSchema(schema),
-          resolvers,
-        }),
-        graphiql: true,
-        context: (): any => {
-          return {
-            headers,
-            variables,
-            templateDir: "presets/shopify",
-          }
-        },
-      })(req);
-      return response;
+      return graphqlHandler(req);
     }
 
     return new Response("Not Found", {
@@ -55,8 +29,13 @@ const server = new Server({
       },
     });
   },
-  port: 8080,
+  port: parseInt(port),
 });
 
-server.listenAndServeTls("./certs/cert.pem", "./certs/private.pem");
-console.log("Server listening on https://localhost:8080/graphql");
+if (tls) {
+  server.listenAndServeTls("./certs/cert.pem", "./certs/private.pem");
+  console.log(`Server listening on port ${port} with TLS`);
+} else {
+  server.listenAndServe();
+  console.log(`Server listening on port ${port}`);
+}

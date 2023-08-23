@@ -9,40 +9,37 @@ completion types are:
 {
     "result": {
         {{!-- Use the submit completion cookie but default to submit success --}}
-        "__typename": "{{get path="ms-cart-submit-completion" default="SubmitSuccess" context=context.headers}}",
+        "__typename": "SubmitSuccess",
         "attemptedId": "{{faker "random.uuid"}}",
         "attemptId": "{{faker "string.uuid"}}",
         "success": true,
         "checkoutUrl": "{{faker "internet.url"}}",
         "errors": [
-            {{#if (eq (get path="ms-cart-submit-completion" context=context.headers) "SubmitFailed") }}
-                {{#repeat 3}}
-                    {
-                        "message": "Error: {{get path="ms-cart-error-code" context=context.headers default="Could not add item to the cart"}}",
-                        "field": [
-                            "cartLines",
-                            "quantity"
-                        ],
-                        "code": "{{get path="ms-cart-error-code" context=context.headers default="ERROR"}}"
-                    }
-                {{/repeat}}
-            {{/if}}
-        
-        ],
-        "pollAfter": "{{faker "date.future"}}"
-    },
-    "errors": [
-        {{#if (eq (get path="ms-cart-submit-completion" context=context.headers)) }}
-            {{#repeat 3}}
+        {{!-- TODO: Cart submission errors --}}
+            {{!-- {{#repeat 3}}
                 {
                     "message": "Error: {{get path="ms-cart-error-code" context=context.headers default="Could not add item to the cart"}}",
                     "field": [
                         "cartLines",
                         "quantity"
                     ],
-                    "code": "{{get path="ms-cart-error-code" context=context.headers default="INVALID"}}"
+                    "code": "{{get path="ms-cart-error-code" context=context.headers default="ERROR"}}"
                 }
-            {{/repeat}}
-        {{/if}}
+            {{/repeat}}         --}}
+        ],
+        "pollAfter": "{{faker "date.future"}}"
+    },
+    "errors": [
+        {{!-- TODO: Cart submission errors --}}
+        {{!-- {{#repeat 3}}
+            {
+                "message": "Error: {{get path="ms-cart-error-code" context=context.headers default="Could not add item to the cart"}}",
+                "field": [
+                    "cartLines",
+                    "quantity"
+                ],
+                "code": "{{get path="ms-cart-error-code" context=context.headers default="INVALID"}}"
+            }
+        {{/repeat}} --}}
     ]
 }

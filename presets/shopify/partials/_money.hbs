@@ -1,4 +1,4 @@
 {
     "amount": "{{faker "number.float" min=(select min 50) max=(select max 100) precision=0.01}}",
-    "currencyCode": "{{get path=context.variables.country context=context.currency default="USD"}}"
+    "currencyCode": "{{get path=(select context.variables.country "US") context=context.currency}}"
 }

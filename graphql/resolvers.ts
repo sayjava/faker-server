@@ -57,7 +57,7 @@ const getExtraContext = (templateDir: string) => {
   } catch {
     return {};
   }
-}
+};
 
 const makeResolvers = (
   fields: { [key: string]: any },
@@ -95,11 +95,13 @@ const makeResolvers = (
       });
 
       const extraContext = getExtraContext(templateDir);
-      const content = compileFunc({ context: { tree, ...extraContext, ...ctx } });
+      const content = compileFunc({
+        context: { tree, ...extraContext, ...ctx },
+      });
       if (content === "") {
-        return null
+        return null;
       }
-      
+
       return JSON.parse(content);
     };
 
@@ -109,7 +111,7 @@ const makeResolvers = (
   return operations;
 };
 
-export const createResolvers = (
+export const createPresetResolvers = (
   arg: CreateResolverArgs,
 ): { [key: string]: any } => {
   const { schema, templateDir } = arg;

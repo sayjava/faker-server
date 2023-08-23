@@ -2,6 +2,7 @@ export { Server } from "https://deno.land/std@0.166.0/http/server.ts";
 export { GraphQLHTTP } from "https://deno.land/x/gql@1.1.2/mod.ts";
 export { makeExecutableSchema } from "https://deno.land/x/graphql_tools@0.0.2/mod.ts";
 export { gql } from "https://deno.land/x/graphql_tag@0.0.1/mod.ts";
+export { existsSync } from "https://deno.land/std@0.199.0/fs/mod.ts";
 export {
   buildClientSchema,
   buildSchema,
@@ -9,7 +10,10 @@ export {
   printSchema,
 } from "npm:graphql@15.5.0";
 export * as Faker from "npm:@faker-js/faker";
-export * as objectPath from "npm:object-path";
+export * as parser from "https://deno.land/std@0.194.0/flags/mod.ts";
+
+import * as objectPath from "npm:object-path";
+export { objectPath };
 
 export type {
   ArgumentNode,
@@ -29,3 +33,5 @@ export type ServerContext = {
   headers: Record<string, string | number | boolean>;
   cookies: Record<string, string | number | boolean>;
 };
+
+export * as logger from "https://deno.land/std@0.199.0/log/mod.ts";

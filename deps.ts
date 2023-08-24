@@ -32,6 +32,24 @@ export type ServerContext = {
   variables: Record<string, string | number | boolean>;
   headers: Record<string, string | number | boolean>;
   cookies: Record<string, string | number | boolean>;
+  request: Request;
 };
 
 export * as logger from "https://deno.land/std@0.199.0/log/mod.ts";
+
+export const logRequest = (req: Request, extra: Record<string, any>) => {
+  return JSON.stringify({
+    ...extra,
+    timestamp: new Date().toISOString(),
+    httpRequest: {
+      request: {
+        requestMethod: req.method,
+        requestUrl: req.url,
+        httpVersion: req.headers.get("version"),
+        headers: Object.fromEntries(req.headers.entries()),
+        referer: req.headers.get("referrer"),
+        userAgent: req.headers.get("user-agent"),
+      },
+    },
+  });
+};

@@ -63,6 +63,7 @@ export const createHandler = ({ templateDir }: { templateDir: string }) => {
         headers,
         variables,
         templateDir,
+        request: req,
       };
     }
 

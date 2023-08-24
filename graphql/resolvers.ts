@@ -3,6 +3,7 @@ import {
   GraphQLResolveInfo,
   GraphQLSchema,
   Handlebars,
+  logRequest,
   ServerContext,
 } from "../deps.ts";
 import { convertDirectivesToObj, resolveInfoToTree } from "./utils.ts";
@@ -72,37 +73,49 @@ const makeResolvers = (
       ctx: ServerContext,
       resolveInfo: GraphQLResolveInfo,
     ) => {
-      console.info(`graphql: [received operation] ${fieldName}`);
+      try {
+        const directives = convertDirectivesToObj(
+          resolveInfo.operation.directives ?? [],
+          ctx.variables,
+        );
+        const extraParams = { __args: params, __directives: directives };
 
-      const directives = convertDirectivesToObj(
-        resolveInfo.operation.directives ?? [],
-        ctx.variables,
-      );
-      const extraParams = { __args: params, __directives: directives };
+        const tree = {
+          [fieldName]: {
+            ...extraParams,
+            ...resolveInfoToTree(resolveInfo, ctx.variables),
+          },
+        };
+        const template = Deno.readTextFileSync(
+          [templateDir, `${fieldName}.hbs`].join("/"),
+        );
+        const compileFunc = Handlebars.compile(template, {
+          compat: true,
+          preventIndent: false,
+        });
 
-      const tree = {
-        [fieldName]: {
-          ...extraParams,
-          ...resolveInfoToTree(resolveInfo, ctx.variables),
-        },
-      };
-      const template = Deno.readTextFileSync(
-        [templateDir, `${fieldName}.hbs`].join("/"),
-      );
-      const compileFunc = Handlebars.compile(template, {
-        compat: true,
-        preventIndent: false,
-      });
+        const extraContext = getExtraContext(templateDir);
+        const content = compileFunc({
+          context: { tree, ...extraContext, ...ctx },
+        });
+        if (content === "") {
+          return null;
+        }
 
-      const extraContext = getExtraContext(templateDir);
-      const content = compileFunc({
-        context: { tree, ...extraContext, ...ctx },
-      });
-      if (content === "") {
-        return null;
+        console.info(
+          logRequest(ctx.request, { operation: fieldName, severity: "INFO" }),
+        );
+        return JSON.parse(content);
+      } catch (error) {
+        console.error(
+          logRequest(ctx.request, {
+            operation: fieldName,
+            severity: "ERROR",
+            message: error.toString(),
+          }),
+        );
+        throw error;
       }
-
-      return JSON.parse(content);
     };
 
     operations[fieldName] = resolver;

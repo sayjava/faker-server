@@ -39,3 +39,9 @@ if (tls) {
   server.listenAndServe();
   console.log(`Server listening on port ${port}`);
 }
+
+Deno.addSignalListener("SIGINT", () => {
+  server.close();
+  console.log("faker-server stopped");
+  Deno.exit(0);
+});

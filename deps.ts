@@ -42,14 +42,12 @@ export const logRequest = (req: Request, extra: Record<string, any>) => {
     ...extra,
     timestamp: new Date().toISOString(),
     httpRequest: {
-      request: {
-        requestMethod: req.method,
-        requestUrl: req.url,
-        httpVersion: req.headers.get("version"),
-        headers: Object.fromEntries(req.headers.entries()),
-        referer: req.headers.get("referrer"),
-        userAgent: req.headers.get("user-agent"),
-      },
+      requestMethod: req.method,
+      requestUrl: req.url,
+      httpVersion: req.headers.get("version"),
+      headers: Object.fromEntries(req.headers.entries()),
+      referer: req.headers.get("referrer"),
+      userAgent: req.headers.get("user-agent"),
     },
   });
 };

@@ -8,6 +8,6 @@
    {{#if (eq context.tree.collection.__args.handle "no-items-collection")}}
         {{> collection products_total=0}}
     {{else}}
-        {{> collection products_total=(select context.tree.collection.products.__args.first 10) }}
+        {{> collection products_total=(select context.tree.collection.products.__args.first select context.tree.collection.products.__args.last 0) }}
     {{/if}}
 {{/unless}}

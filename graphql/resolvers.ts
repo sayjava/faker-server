@@ -103,13 +103,13 @@ const makeResolvers = (
         }
 
         console.info(
-          logRequest(ctx.request, { operation: fieldName, severity: "INFO" }),
+          logRequest(ctx.request, { operation: { id: fieldName }, severity: "INFO" }),
         );
         return JSON.parse(content);
       } catch (error) {
         console.error(
           logRequest(ctx.request, {
-            operation: fieldName,
+            operation: { id: fieldName },
             severity: "ERROR",
             message: error.toString(),
           }),

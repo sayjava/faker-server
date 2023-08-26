@@ -1,0 +1,18 @@
+{
+    "edges": [
+        {{#repeat 5}}
+        {
+            "node": {{> page}} 
+        }
+        {{/repeat}}
+    ],
+    "pageInfo": {
+        "hasNextPage": false,
+        "hasPreviousPage": false
+    },
+    "nodes": [
+        {{#repeat 5}}
+            {{> page}}
+        {{/repeat}}
+    ]
+}

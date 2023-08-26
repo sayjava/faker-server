@@ -1,3 +1,25 @@
+{{#*inline "simple-product-variant"}}
+{
+   "__typename": "ProductVariant",
+   "id": "gid://shopify/ProductVariant/{{faker "string.uuid" }}",
+   "barcode": "{{faker "string.alphanumeric" 5}}",
+   "barcode": "{{faker "string.alphanumeric" 10}}",
+   "sku": "{{faker "string.alphanumeric" 5}}",
+   "title": "{{faker "commerce.productName" }}",
+   "availableForSale": false,
+   "selectedOptions": [],
+   "price": {{> money}}
+   {{!-- "compareAtPrice": {{> money}}, --}}
+   {{!-- "currentlyNotInStock": false,
+   "quantityAvailable": 10,
+   "requiresShipping": true --}}
+   {{!-- "image": {{> image}}, --}}
+   {{!-- "image": {{> image}}, --}}
+   {{!-- "unitPrice": {{> money}}, --}}
+   {{!-- "priceV2": {{> money}} --}}
+}
+{{/inline}}
+
 {
    "__typename": "ProductVariant",
    "id": "gid://shopify/ProductVariant/{{faker "string.uuid" }}",
@@ -38,10 +60,8 @@
         "quantityValue": {{faker "number.int" min=10 max=1000}},
         "referenceUnit": "ML",
         "referenceValue": {{faker "number.int" min=10 max=1000}}
-    }
-    {{!-- Stops an infinite recursion of templates --}}
-    {{#unless no_product}}
-    ,"product": {
+    },
+    "product": {
         "__typename": "Product",
         "id": "gid://shopify/Product/{{faker 'number.int' min=1000000000 max=9999999999}}",
         "availableForSale": true,
@@ -95,16 +115,15 @@
             "edges": [
                 {{#repeat 3}}
                     {
-                        "node": {{> product-variant no_product=true}}
+                        "node": {{> simple-product-variant }}
                     }
                 {{/repeat}}
             ],
             "nodes": [
                 {{#repeat 3}}
-                    {{> product-variant no_product=true}}
+                    {{> simple-product-variant }}
                 {{/repeat}}
             ]
         }
     }
-    {{/unless}}
 }

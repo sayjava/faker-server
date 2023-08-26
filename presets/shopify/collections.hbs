@@ -11,13 +11,13 @@
         {{#repeat (select context.tree.collections.__args.first 10)}}
             {
                 "cursor": "{{faker "string.alphanumeric" 5}}",
-                "node": {{> collection products_total=(select context.tree.collection.products.__args.first 10)}}
+                "node": {{> collection products_total=(select context.tree.collection.products.__args.first context.tree.collection.products.__args.last 0)}}
             }
         {{/repeat}}
     ],
     "nodes": [
         {{#repeat (select context.tree.collections.__args.first 10)}}
-            {{> collection products_total=(select context.tree.collection.products.__args.first 10)}}
+            {{> collection products_total=(select context.tree.collection.products.__args.first context.tree.collection.products.__args.last 0)}}
         {{/repeat}}
     ]
 }

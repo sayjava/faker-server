@@ -38,8 +38,7 @@
             "value": {
                 "__typename": "{{randomize "MoneyV2" "SellingPlanCheckoutChargePercentageValue"}}",
                 "amount": {{faker "number.float" min=1 max=100 precision=0.1}},
-                {{!-- TODO: Implement internationalization here--}}
-                "currencyCode": "USD",
+                "currencyCode": "{{get path=(select context.variables.country "US") context=context.currency}}",
                 "percentage": {{faker "number.int" min=1 max=100 precision=0.1}}
             }
         },
@@ -189,7 +188,7 @@
         "pageInfo": {{> cursor}},
         "edges": [
             {{#unless (eq context.tree.product.__args.handle "no-variants-product")}}
-                {{#repeat 3}}
+                {{#repeat (select variants_total 3)}}
                     {
                         "node": {{> product-variant on_sale=(eq context.tree.product.__args.handle "on-sale-product") out_of_stock=(eq context.tree.product.__args.handle "out-of-stock-product") }}
                     }
@@ -198,7 +197,7 @@
         ],
         "nodes": [
              {{#unless (eq context.tree.product.__args.handle "no-variants-product")}}
-                {{#repeat 3}}
+                {{#repeat (select variants_total 3)}}
                     {{> product-variant on_sale=(eq context.tree.product.__args.handle "on-sale-product") out_of_stock=(eq context.tree.product.__args.handle "out-of-stock-product") }}
                 {{/repeat}}
             {{/unless}}
@@ -207,16 +206,12 @@
     "collections": {
         "pageInfo": {{> cursor}},
         "edges": [
-            {{#repeat 2}}
-                {
-                    "node": {{> simple-collection}}
-                }
-            {{/repeat}}
+            {
+                "node": {{> simple-collection}}
+            }
         ],
         "nodes": [
-            {{#repeat 2}}
-                 {{> simple-collection}}
-            {{/repeat}}
+            {{> simple-collection}}
         ]
     },
     "requiresSellingPlan": {{eq context.tree.product.__args.handle "subscription-product"}},

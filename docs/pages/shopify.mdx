@@ -1,43 +1,34 @@
 ---
-title: Fake Shopify - Mock Shopify GraphQL API Server
+title: Mock Shopify - Mock Shopify GraphQL API Server
 ---
 
 import { GraphQLExplorer } from '../components/Explorer'
+import { CTA } from '../components/CTA'
 import { ShopifyFeatures } from '../components/ShopifyFeatures'
 import { Bleed } from 'nextra-theme-docs'
 import { Callout } from 'nextra-theme-docs'
 
-{<h1 className="text-center text-4xl tracking-tighter font-extrabold md:text-5xl mt-8">Fake Shopify</h1>}
+{<h1 className="text-center text-4xl tracking-tighter font-extrabold md:text-5xl mt-8">Mock Shopify</h1>}
 <p class="text-lg text-center py-2 mb-2 text-gray-600 md:!text-2xl">Rapildy Develop Custom Shopify Storefronts</p>
+<p class="text-center py-4 font-bold">{process.env.SHOPIFY_ENDPOINT}</p>
 
-<div className="mt-16 mb-20 text-center">
-  [Full Docs](/https://github.com/sayjava/faker-server/blob/main/presets/shopify) · [GitHub Repository](https://github.com/sayjava/faker-server/blob/main/presets/shopify)
+<div className="mb-20 text-center">
+  [Documentation](https://github.com/sayjava/faker-server/blob/main/presets/shopify)
 </div>
 
 <div class="py-8">
     <ShopifyFeatures />
 </div>
 
-{<h2 className="text-center text-2xl tracking-tighter font-extrabold md:text-3xl mt-8">Explore THE API</h2>}
-<p class="text-center py-4 font-bold">{process.env.SHOPIFY_ENDPOINT}</p>
-<div class="py-4">
-    <GraphQLExplorer />
+{<h2 className="text-center text-2xl tracking-tighter font-extrabold md:text-3xl mt-8">Example Shops</h2>}
+
+<div className="flex space-x-6 justify-center w-full py-4">
+  <CTA href="https://hydrogen-mock-shopify.faker-server.dev" title="Hydrogen Shop →" />
+  <CTA href="https://nextjs-mock-shopify.faker-server.dev" title="NextJS Ecommerce Shop →" />
 </div>
 
-### Supported Operations
 
-- [x] Shop
-- [x] Product(s)
-- [x] Collection(s)
-- [x] Cart
-- [x] Checkout
-- [x] Search
-- [x] Predictive Search
-- [x] Customer(s) (Coming Soon)
-- [x] Order(s)
-
-<div class="py-4 px-0">
-    <Callout type="warning" emoji="⚠️">
-        Unsupported operations will return a <code>[operationName].hbs file can not be found</code>.
-    </Callout>
+{<h2 className="text-center text-2xl tracking-tighter font-extrabold md:text-3xl mt-8">Explore THE API</h2>}
+<div class="py-4">
+    <GraphQLExplorer />
 </div>

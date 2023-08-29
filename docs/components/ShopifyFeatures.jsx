@@ -16,7 +16,7 @@ const Features = [
   {
     title: "Test Alternative Scenarios and Edge Cases",
     description:
-      "You can use the Shopify Storefront API to test alternative scenarios and edge cases. See the <a class='underline text-lime-800 font-bold' href='https://github.com/sayjava/faker-server/blob/main/preseets/shopify/README.md'/>Docs</a> for more information.",
+      "You can use the Shopify Storefront API to test alternative scenarios and edge cases. See the <a class='underline text-lime-800 font-bold' href='https://github.com/sayjava/faker-server/blob/main/presets/shopify/README.md'/>Docs</a> for more information.",
     icon: () => "🔃",
   },
   {

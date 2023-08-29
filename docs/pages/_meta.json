@@ -6,9 +6,5 @@
   "shopify": {
     "title": "Shopify",
     "type": "page"
-  },
-  "weather": {
-    "title": "WeatherKit",
-    "type": "page"
   }
 }

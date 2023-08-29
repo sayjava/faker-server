@@ -3,5 +3,31 @@
     "dev": "deno run --allow-read --allow-net --watch main.ts",
     "dev:shopify": "deno run --allow-read --allow-net --watch main.ts --templates presets/shopify --tls",
     "deploy:shopify": "gcloud run deploy mock-shopify --source . --region europe-west1 --allow-unauthenticated --args=\"--templates,presets/shopify\""
+  },
+  "fmt": {
+    "exclude": [
+      "docs",
+      "node_modules",
+      "dist"
+    ],
+    "include": [
+      "templates/**/*.ts",
+      "graphql/**/*.ts",
+      "deps.ts",
+      "main.ts"
+    ]
+  },
+  "lint": {
+    "exclude": [
+      "docs",
+      "node_modules",
+      "dist"
+    ],
+    "include": [
+      "templates/**/*.ts",
+      "graphql/**/*.ts",
+      "deps.ts",
+      "main.ts"
+    ]
   }
 }

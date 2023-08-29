@@ -4,9 +4,9 @@
   The easiest and quickest way to a build a Shopify/E-Commerce Storefront without having to connect to a real Shopify store.
 </p>
 <p align="center">
-  <a href="https://hydrogen-shopify.faker-server.com">NextJS Example Shop »</a>
-  <a href="https://nextjs-commerce.faker-server.com">Hydrogen Example Shop »</a>
-  <a href="https://shopify.faker-server.com/graphql">GraphQL API/Playground »</a>
+  <a href="https://nextjs-mock-shopify.faker-server.dev">NextJS Example Shop »</a>
+  <a href="https://hydrogen-mock-shopify.faker-server.dev">Hydrogen Example Shop »</a>
+  <a href="https://shopify.faker-server.dev/graphql">GraphQL API/Playground »</a>
 </p>
 
 `Mock Shopify` is a mock Shopify GraphQL API server for testing and development
@@ -21,7 +21,7 @@ having to connect to a real Shopify store. `Mock Shopify` is built on top of
 mock Shopify API.
 
 <p align="center">
-<a href="https://shopify.faker-server.com/graphql">https://shopify.faker-server.com/graphql</a>
+<a href="https://shopify.faker-server.dev/graphql">https://shopify.faker-server.dev/graphql</a>
 </p>
 
 ## Example Storefronts
@@ -30,7 +30,7 @@ mock Shopify API.
 it works as expected. The example storefronts are hosted on Google Cloud Run and
 are available for testing.
 
-## [Example Hydrogen Store](https://hydrogen-shopify.faker-server.com)
+## [Example Hydrogen Store](https://hydrogen-mock-shopify.faker-server.dev)
 
 The [Hydrogen](https://hydrogen.shopify.dev/) framework is a Shopify official
 storefront. The example storefront is a clone of the Shopify Hydrogen Starter.
@@ -50,7 +50,7 @@ The only change to the codebase is the `PUBLIC_STORE_DOMAIN` variable in the
 SESSION_SECRET="mock-secret"
 PUBLIC_STOREFRONT_API_TOKEN="mock-api-token"
 PRIVATE_STOREFRONT_API_TOKEN="mock-api-token"
-PUBLIC_STORE_DOMAIN="https://mock-shopify-5j47bgnbdq-ew.a.run.app/graphql"
+PUBLIC_STORE_DOMAIN="shopify.faker-server.dev/graphql"
 PUBLIC_STOREFRONT_ID="foobar"
 ```
 
@@ -111,7 +111,7 @@ TWITTER_SITE="https://github.com/sayjava"
 SITE_NAME="Mock-Shop"
 SHOPIFY_REVALIDATION_SECRET="mock-secret"
 SHOPIFY_STOREFRONT_ACCESS_TOKEN="mock-token"
-SHOPIFY_STORE_DOMAIN="mock-shopify-5j47bgnbdq-ew.a.run.app"
+SHOPIFY_STORE_DOMAIN="shopify.fakerserver.dev/graphql"
 ```
 
 Add the placeholder domain to the `next.config.js` file to be able to render the

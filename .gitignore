@@ -1,3 +1,5 @@
 certs
 .DS_Store
 faker-server
+.next
+node_modules

@@ -1,4 +1,4 @@
-import { parser, Server } from "./deps.ts";
+import { cors, parser, Server } from "./deps.ts";
 import { createHandler as createGraphQLHandler } from "./graphql/handler.ts";
 import "./templates/helpers/helpers.ts";
 
@@ -11,23 +11,22 @@ const {
 const graphqlHandler = createGraphQLHandler({ templateDir: templates });
 
 const server = new Server({
-  handler: (req) => {
+  // deno-lint-ignore no-explicit-any
+  onError: (err: any) => {
+    console.log(
+      JSON.stringify({ labels: { message: err.message }, httpRequest: {} }),
+    );
+    return new Response(err.message, { status: 500 });
+  },
+  handler: async (req) => {
     const { pathname } = new URL(req.url);
+    let response = new Response("Not Found", { status: 404 });
 
     if (pathname.includes("graphql")) {
-      return graphqlHandler(req);
+      response = await graphqlHandler(req);
     }
 
-    return new Response("Not Found", {
-      status: 404,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Headers":
-          "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With",
-        "Access-Control-Allow-Methods": "POST, OPTIONS, GET, PUT, DELETE",
-      },
-    });
+    return cors.default(req, response);
   },
   port: parseInt(port),
 });

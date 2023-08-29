@@ -1,0 +1,43 @@
+---
+title: Fake Shopify - Mock Shopify GraphQL API Server
+---
+
+import { GraphQLExplorer } from '../components/Explorer'
+import { ShopifyFeatures } from '../components/ShopifyFeatures'
+import { Bleed } from 'nextra-theme-docs'
+import { Callout } from 'nextra-theme-docs'
+
+{<h1 className="text-center text-4xl tracking-tighter font-extrabold md:text-5xl mt-8">Fake Shopify</h1>}
+<p class="text-lg text-center py-2 mb-2 text-gray-600 md:!text-2xl">Rapildy Develop Custom Shopify Storefronts</p>
+
+<div className="mt-16 mb-20 text-center">
+  [Full Docs](/https://github.com/sayjava/faker-server/blob/main/presets/shopify) · [GitHub Repository](https://github.com/sayjava/faker-server/blob/main/presets/shopify)
+</div>
+
+<div class="py-8">
+    <ShopifyFeatures />
+</div>
+
+{<h2 className="text-center text-2xl tracking-tighter font-extrabold md:text-3xl mt-8">Explore THE API</h2>}
+<p class="text-center py-4 font-bold">{process.env.SHOPIFY_ENDPOINT}</p>
+<div class="py-4">
+    <GraphQLExplorer />
+</div>
+
+### Supported Operations
+
+- [x] Shop
+- [x] Product(s)
+- [x] Collection(s)
+- [x] Cart
+- [x] Checkout
+- [x] Search
+- [x] Predictive Search
+- [x] Customer(s) (Coming Soon)
+- [x] Order(s)
+
+<div class="py-4 px-0">
+    <Callout type="warning" emoji="⚠️">
+        Unsupported operations will return a <code>[operationName].hbs file can not be found</code>.
+    </Callout>
+</div>

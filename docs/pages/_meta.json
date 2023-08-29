@@ -1,0 +1,14 @@
+{
+  "index": {
+    "type": "page",
+    "title": "Home"
+  },
+  "shopify": {
+    "title": "Shopify",
+    "type": "page"
+  },
+  "weather": {
+    "title": "WeatherKit",
+    "type": "page"
+  }
+}

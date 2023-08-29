@@ -36,8 +36,9 @@ export type ServerContext = {
 };
 
 export * as logger from "https://deno.land/std@0.199.0/log/mod.ts";
+export * as cors from "https://deno.land/x/edge_cors/src/cors.ts";
 
-export const logRequest = (req: Request, extra: Record<string, any>) => {
+export const logRequest = (req: Request, extra: Record<string, string>) => {
   return JSON.stringify({
     ...extra,
     timestamp: new Date().toISOString(),

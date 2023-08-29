@@ -71,6 +71,7 @@
     "https://deno.land/std@0.199.0/path/to_file_url.ts": "dd32f7a01bbf3b15b5df46796659984b372973d9b2d7d59bcf0eb990763a0cb5",
     "https://deno.land/std@0.199.0/path/to_namespaced_path.ts": "4e643ab729bf49ccdc166ad48d2de262ff462938fcf2a44a4425588f4a0bd690",
     "https://deno.land/std@0.199.0/path/win32.ts": "8b3f80ef7a462511d5e8020ff490edcaa0a0d118f1b1e9da50e2916bdd73f9dd",
+    "https://deno.land/x/edge_cors@0.2.1/src/cors.ts": "288895d3288d06594c9b6a2e529884dd827c0d0e465256052a4d63a25d99838d",
     "https://deno.land/x/gql@1.1.2/common.ts": "118d5008c59d5ab77bd319803c7ebbe7ed8517de308594d60282b90c5d8c22c7",
     "https://deno.land/x/gql@1.1.2/graphiql/markup.ts": "ea572ab19ef963f8716d1b827204fec87a40b55eefde11f9b5342fc5382ba597",
     "https://deno.land/x/gql@1.1.2/graphiql/render.ts": "6d158e74c93192ce6b0230ecf18b0cb6ad37270b8f1cec8c2638109198c4ba1b",

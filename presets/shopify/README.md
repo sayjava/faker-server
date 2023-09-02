@@ -221,6 +221,13 @@ query {
 }
 ```
 
+### Shop Examples
+
+- [Out of Stock Product](https://hydrogen-mock-shopify.faker-server.dev/products/out-of-stock-product)
+- [Gift Card Product](https://hydrogen-mock-shopify.faker-server.dev/products/giftcard-product)
+- [Not Found Product](https://hydrogen-mock-shopify.faker-server.dev/products/not-found-product)
+- [On Sale Product](https://hydrogen-mock-shopify.faker-server.dev/products/on-sale-product)
+
 ### Product Recommendations
 
 Product recommendations can be retrieved for a product using any product ID.
@@ -334,7 +341,7 @@ the Shopify Storefront API.
 
 | Query      | Description                                |
 | ---------- | ------------------------------------------ |
-| `no items` | Simulates a search that returns no results |
+| `no-results` | Simulates a search that returns no results |
 
 ### Predictive Search
 
@@ -347,7 +354,7 @@ perfect for build out UIs.
 
 | Header     | Description                                           |
 | ---------- | ----------------------------------------------------- |
-| `no items` | Simulates a predictive search that returns no results |
+| `no-results` | Simulates a predictive search that returns no results |
 
 ### Customer
 
@@ -361,6 +368,14 @@ perfect for build out UIs.
   - Create
   - Updated
   - Delete
+
+### Shop Example
+
+> [!NOTE] Any email and password combination will work for authentication. The site does not keep any state.
+
+- [Customer Login](https://hydrogen-mock-shopify.faker-server.dev/login)
+- [Customer Orders](https://hydrogen-mock-shopify.faker-server.dev/account/orders)
+- [Customer Orders](https://hydrogen-mock-shopify.faker-server.dev/account/profile)
 
 #### Alternative Customer Scenarios
 

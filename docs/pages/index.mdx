@@ -5,25 +5,40 @@ title: Faker Server - Easiy create a mock server with fake data using Faker.js a
 import { FakerServerFeatures } from '../components/FakerServerFeatures'
 
 {<h1 className="text-center text-4xl tracking-tighter font-extrabold md:text-5xl mt-8">Faker Server</h1>}
-<p class="text-lg text-center py-2 mb-2 text-gray-600 md:!text-2xl">Handlebars + FakerJs</p>
+<p className="text-lg text-center py-2 mb-2 text-gray-600 md:!text-2xl">HTTP + Handlebars + FakerJS</p>
 
+<FakerServerFeatures />
 
-{<h1 className="text-center text-4xl tracking-tighter font-extrabold md:text-5xl mt-8">Docs coming soon</h1>}
+### Templating Example
 
-{/* <div class="py-8">
-    <FakerServerFeatures />
+<div className="flex space-x-4">
+<div>
+    <h3>Template</h3>
+    ```json
+        {
+            "name": "{{faker "name.firstName"}} {{faker "name.lastName"}}",
+            "email": "{{faker "internet.email"}}",
+            "address": "{{faker "address.streetAddress"}}",
+            "city": "{{faker "address.city"}}",
+            "country": "{{faker "address.country"}}",
+            "phone": "{{faker "phone.phoneNumber"}}",
+            "avatar": "{{faker "image.avatar"}}"
+        }
+    ```
+</div>
+<div>
+    <h3>Result</h3>
+    ```json
+        {
+            "name": "{{faker "name.firstName"}} {{faker "name.lastName"}}",
+            "email": "{{faker "internet.email"}}",
+            "address": "{{faker "address.streetAddress"}}",
+            "city": "{{faker "address.city"}}",
+            "country": "{{faker "address.country"}}",
+            "phone": "{{faker "phone.phoneNumber"}}",
+            "avatar": "{{faker "image.avatar"}}"
+        }
+    ```
 </div>
 
-### Example
-
-```handlebars []
-{
-    "name": "{{name.firstName}} {{name.lastName}}",
-    "email": "{{internet.email}}",
-    "address": "{{address.streetAddress}}",
-    "city": "{{address.city}}",
-    "country": "{{address.country}}",
-    "phone": "{{phone.phoneNumber}}",
-    "avatar": "{{image.avatar}}"
-}
-``` */}
+</div>

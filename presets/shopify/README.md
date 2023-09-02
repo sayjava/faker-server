@@ -1,36 +1,37 @@
-# Mock Shopify Guide
+
+<h1 align="center"> Mock Shopify Guide </h1>
 
 <p align="center">
   The easiest and quickest way to a build a Shopify/E-Commerce Storefront without having to connect to a real Shopify store.
 </p>
-<p align="center">
-  <a href="https://nextjs-mock-shopify.faker-server.dev">NextJS Example Shop »</a>
-  <a href="https://hydrogen-mock-shopify.faker-server.dev">Hydrogen Example Shop »</a>
-  <a href="https://shopify.faker-server.dev/graphql">GraphQL API/Playground »</a>
-</p>
-
-`Mock Shopify` is a mock Shopify GraphQL API server for testing and development
-purposes. It uses the Shopify GraphQL Schema to provide a mock of the GraphQL
-API that can be used to rapidly prototype Shopify custom storefronts.
-
-This guide will help you get started with `Mock Shopify`. `Mock Shopify` is a
-mock Shopify API that allows developers to build Shopify UI components without
-having to connect to a real Shopify store. `Mock Shopify` is built on top of
-[Faker Server](https://github.com/sayjava/faker-server) and uses the
-[Shopify Storefront API](https://shopify.dev/docs/storefront-api) to provide a
-mock Shopify API.
 
 <p align="center">
 <a href="https://shopify.faker-server.dev/graphql">https://shopify.faker-server.dev/graphql</a>
 </p>
 
-## Example Storefronts
+## Features
+
+- No Shopify Store required.
+- Simulate different `product`, `collection`, `cart`, `customer` and `search` scenarios
+- Simulate blocks and articles
+- Simulate different product recommendation scenarios
+- Internationalization support
+- Customer authentication support
+
+## Sample Stores
 
 `Mock Shopify` has been tested with some leading E-Commerce frameworks to ensure
 it works as expected. The example storefronts are hosted on Google Cloud Run and
 are available for testing.
 
-## [Example Hydrogen Store](https://hydrogen-mock-shopify.faker-server.dev)
+- [NextJS Commerce](https://nextjs-mock-shopify.faker-server.dev)
+- [Shopify Hydrogen](https://hydrogen-mock-shopify.faker-server.dev)
+
+## Getting Started
+
+Getting started with `Mock Shopify` is easy. You can start with using pre-made example storefronts like NextJS Commerce or Shopify Hydrogen react framework.
+
+### [Example Hydrogen Store](https://hydrogen-mock-shopify.faker-server.dev)
 
 The [Hydrogen](https://hydrogen.shopify.dev/) framework is a Shopify official
 storefront. The example storefront is a clone of the Shopify Hydrogen Starter.
@@ -41,7 +42,7 @@ codebase.
   storefront with Hydrogen
 - Change the shopify domain to the mock shopify URL in the `.env` file
 
-### Changes To Hydrogen Codebase
+#### Changes To Hydrogen Codebase
 
 The only change to the codebase is the `PUBLIC_STORE_DOMAIN` variable in the
 `.env`. this is an example of the `.env` file
@@ -54,7 +55,7 @@ PUBLIC_STORE_DOMAIN="shopify.faker-server.dev/graphql"
 PUBLIC_STOREFRONT_ID="foobar"
 ```
 
-### Internationalization
+#### Internationalization
 
 `Mock Shopify` supports internalization. The default country is `US`. To change
 the country which mostly affects the currency, use the `country` variable in the
@@ -88,7 +89,7 @@ To see this in action using the hydrogen example shop
 - [British Shop](https://hydrogen-shopify.faker-server.com/en-GB)
 - [Japanese Shop](https://hydrogen-shopify.faker-server.com/ja-JP)
 
-## [Example NextJS E-Commerce](https://nextjs-commerce.faker-server.com)
+### [Example NextJS E-Commerce](https://nextjs-commerce.faker-server.com)
 
 The [NextJS E-Commerce](https://github.com/vercel/commerce) framework is a
 popular React framework for building E-Commerce storefronts. The example
@@ -99,7 +100,7 @@ Shopify GraphQL API to pull data with no changes to the codebase.
 - Follow the instructions to run the application
 - Change the shopify domain to the mock shopify URL in the `.env` file
 
-### Changes To NextJS Codebase
+#### Changes To NextJS Codebase
 
 The only change to the codebase is the `SHOPIFY_STORE_DOMAIN` variable in the
 `.env`. this is an example of the `.env` file
@@ -128,10 +129,6 @@ product images
 > [!NOTE] Mock Shopify GraphQL API was built to the specification of the Version
 > 2023-07 of the GraphQL API
 
-## Custom Setup
-
-If you are using a custom setup, then just point your application to the mock
-shopify endpoint
 
 ## Supported Shopify Operations
 

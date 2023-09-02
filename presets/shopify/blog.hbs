@@ -1,0 +1,39 @@
+{
+    "__typename": "OnlineStorePublishable",
+    "articleByHandle": {{> article}},
+    "title": "This is a mock Shopify blog",
+    "seo": {
+        "description": "A mock Shopify blog",
+        "title": "Mock Shopify Blog"
+    },
+    "articles": {
+        "edges": [
+            {{#repeat 5}}
+            {
+                "node": {{> article}}
+            }
+            {{/repeat}}
+        ],
+        "pageInfo": {
+            "hasNextPage": false,
+            "hasPreviousPage":false
+        },
+        "nodes": [
+            {{#repeat 5}}
+                {{> article}}
+            {{/repeat}}
+        ]
+    },
+    "authors": [
+        {{#repeat authors}}
+            {
+                "bio": "{{faker "person.bio"}}",
+                "email": "{{faker "internet.url"}}",
+                "firstName": "{{faker "person.firstName"}}",
+                "lastName": "{{faker "person.lastName"}}",
+                "name": "{{faker "person.firstName"}} {{faker "person.lastName"}}",
+                "title": "{{title}}"
+            }
+        {{/repeat}}
+    ]
+}

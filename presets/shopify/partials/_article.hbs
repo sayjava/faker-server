@@ -21,11 +21,11 @@
             "{{faker 'lorem.word'}}"
         {{/repeat}}
     ],
-    "title": "{{faker 'lorem.sentence'}}",
+    "title": "A Mock Shopify article",
     "trackingPartners": "{{faker 'lorem.word'}}",
     "seo": {
-        "title": "{{faker 'lorem.sentence'}}",
-        "description": "{{faker 'lorem.sentence'}}"
+        "title": "A mock Shopify article",
+        "description": "A mock Shopify article using a mock shopify server"
     },
     "metatfield": {
         "key": "{{faker 'lorem.word'}}",
@@ -50,5 +50,6 @@
                 "url": "{{faker 'internet.url'}}"
             }
         {{/repeat}}
-    ]
+    ],
+    "blog": {{> blog}}
 }

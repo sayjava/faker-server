@@ -1,0 +1,18 @@
+{
+    "pageInfo": {
+        "hasNextPage": true,
+        "hasPreviousPage": false
+    },
+    "edges": [
+        {{#repeat (select context.tree.blogs.__args.first 10)}}
+        {
+            "node": {{> blog}}
+        }
+        {{/repeat}}
+    ],
+    "nodes": [
+        {{#repeat (select context.tree.blogs.__args.first 10)}}
+           {{> blog}}
+        {{/repeat}}
+    ]
+}

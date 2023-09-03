@@ -15,7 +15,7 @@ jobs:
         working-directory: ./docs
       - uses: FirebaseExtended/action-hosting-deploy@v0
         env:
-          FIREBASE_CLI_EXPERIMENTS: true
+          FIREBASE_CLI_EXPERIMENTS: true,webframeworks
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PHAKE_D4468 }}'

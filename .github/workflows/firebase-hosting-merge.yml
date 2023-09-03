@@ -19,4 +19,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PHAKE_D4468 }}'
           channelId: live
           projectId: phake-d4468
-          folder: docs
+          entryPoint: docs

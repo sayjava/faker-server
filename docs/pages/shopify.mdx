@@ -10,10 +10,12 @@ import { Callout } from 'nextra-theme-docs'
 
 {<h1 className="text-center text-4xl tracking-tighter font-extrabold md:text-5xl mt-8">Mock Shopify</h1>}
 <p class="text-lg text-center py-2 mb-2 text-gray-600 md:!text-2xl">Rapildy Develop Custom Shopify Storefronts</p>
-<p class="text-center py-4 font-bold">{process.env.SHOPIFY_ENDPOINT}</p>
+<p class="text-center py-4 font-bold">
+  <a href={process.env.SHOPIFY_ENDPOINT}>{process.env.SHOPIFY_ENDPOINT}</a>
+</p>
 
 <div className="mb-20 text-center">
-  [Documentation](https://github.com/sayjava/faker-server/blob/main/presets/shopify)
+  [Documentation](https://github.com/sayjava/faker-server/blob/main/presets/shopify/README.md)
 </div>
 
 <div class="py-8">
@@ -30,5 +32,5 @@ import { Callout } from 'nextra-theme-docs'
 
 {<h2 className="text-center text-2xl tracking-tighter font-extrabold md:text-3xl mt-8">Explore THE API</h2>}
 <div class="py-4">
-    <GraphQLExplorer />
+  <GraphQLExplorer />
 </div>

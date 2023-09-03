@@ -1,5 +1,0 @@
-{{#if (eq context.tree.cart.__args.id "empty-cart")}}
-    {{> cart num_of_lines=0}}
-{{else}}
-    {{> cart num_of_lines=(select context.tree.cart.lines.__args.first 5)}}
-{{/if}}

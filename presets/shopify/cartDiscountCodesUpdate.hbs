@@ -1,5 +1,0 @@
-{{#if (contains context.tree.cartDiscountCodesUpdate.__args.discountCodes "bad code") }}
-    {{> cartops error=(object message="bad code" field="discountCode" code="MISSING_DISCOUNT_CODE") }}
-{{else}}
-    {{> cartops}}
-{{/if}}

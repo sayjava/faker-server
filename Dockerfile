@@ -14,6 +14,5 @@ RUN adduser -D deno_user
 USER deno_user
 
 COPY --from=builder /app/server /usr/local/bin/server
-COPY --from=builder /app/presets /app/presets
 
 ENTRYPOINT [ "server" ]

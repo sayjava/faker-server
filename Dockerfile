@@ -1,5 +1,7 @@
 FROM denoland/deno:alpine as builder
 
+LABEL description="Mock server for development and testing purposes"
+
 WORKDIR /app
 
 COPY . .

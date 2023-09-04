@@ -52,5 +52,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}
+        tags: ghcr.io/${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}
         labels: ${{ steps.meta.outputs.labels }}
